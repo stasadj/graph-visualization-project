@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="page">
+          <div class="left">
+              <ul>
+                  <li>
+                      <a href="{% url 'index' %}">Home</a>
+                  </li>
+
+              </ul>
+              {% block links %}{% endblock %}
+          </div>
+          <div class="center">
+              {% block content %}{% endblock %}
+          </div>
+          <div class="footer">SOK projekat - Tim15</div>
+</div>
+</body>
+</html>
