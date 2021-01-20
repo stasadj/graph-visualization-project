@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'CORE.apps.CoreConfig', #dina dodala!
+    'core_django_app.apps.CoreDjangoAppConfig', #dina dodala!
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

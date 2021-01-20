@@ -5,5 +5,6 @@ from django.apps.registry import apps #dina dodala
 
 
 def index(request):
-    title = apps.get_app_config('CORE').verbose_name
-    return render(request,'index.html',{"title":title})
+    title = apps.get_app_config('core_django_app').verbose_name
+    return render(request, 'index.html', {"title": title})
+
