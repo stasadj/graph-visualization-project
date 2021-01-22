@@ -45,7 +45,10 @@ class LoadXMLData(LoadDataService):
             tag = child.tag
             text = child.text
             attrs = child.attrib
-            attrs['elemText'] = text.strip()
+            if text is not None:
+                attrs['elemText'] = text.strip()
+            else:
+                attrs['elemText'] = ''
             self.graph.insert_vertex(tag, attrs)
 
         for v1 in self.graph.vertices():
@@ -65,11 +68,13 @@ class LoadXMLData(LoadDataService):
             tag = element.tag
             text = element.text
             attrs = element.attrib
-            attrs['elemText'] = text.strip()
+            if text is not None:
+                attrs['elemText'] = text.strip()
+            else:
+                attrs['elemText'] = ''
             element_vertex[element] = self.graph.insert_vertex(tag, attrs)
 
         for element, vertex in element_vertex.items():
             for child in element:
                 self.graph.insert_edge(vertex, element_vertex[child])
-
 
