@@ -15,9 +15,9 @@ class Graph:
         """ Struktura koja predstavlja čvor grafa."""
         __slots__ = '_element', '_attributes'
 
-        def __init__(self, x):
+        def __init__(self, x, attrs):
             self._element = x
-            self._attributes = {}
+            self._attributes = attrs
 
         def element(self):
             """Vraća element vezan za čvor grafa."""
@@ -132,9 +132,9 @@ class Graph:
         for edge in adj[v].values():
             yield edge
 
-    def insert_vertex(self, x=None):
+    def insert_vertex(self, x=None, attrs=None):
         """ Ubacuje i vraća novi čvor (Vertex) sa elementom x"""
-        v = self.Vertex(x)
+        v = self.Vertex(x, attrs)
         self._outgoing[v] = {}
         if self.is_directed():
             self._incoming[v] = {}  # mapa različitih vrednosti za dolazne čvorove

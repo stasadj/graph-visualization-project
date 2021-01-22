@@ -13,15 +13,18 @@ class Graph:
     # ------------------------- Ugnježdena klasa Vertex -------------------------
     class Vertex:
         """ Struktura koja predstavlja čvor grafa."""
-        __slots__ = '_element'
+        __slots__ = '_element', '_attributes'
 
-        def __init__(self, x):
+        def __init__(self, x, attrs):
             self._element = x
-            self.attributes = {}
+            self._attributes = attrs
 
         def element(self):
             """Vraća element vezan za čvor grafa."""
             return self._element
+
+        def attributes(self):
+            return self._attributes
 
         def __hash__(self):  # omogućava da Vertex bude ključ mape
             return hash(id(self))
@@ -41,7 +44,7 @@ class Graph:
 
         def endpoints(self):
             """ Vraća torku (u,v) za čvorove u i v."""
-            return (self._origin, self._destination)
+            return self._origin, self._destination
 
         def opposite(self, v):
             """ Vraća čvor koji se nalazi sa druge strane čvora v ove ivice."""
@@ -49,7 +52,7 @@ class Graph:
                 raise TypeError('v mora biti instanca klase Vertex')
 
             return self._destination if v is self._origin else self._origin
-            raise ValueError('v nije čvor ivice')
+            # raise ValueError('v nije čvor ivice')  unreachable
 
         def element(self):
             """ Vraća element vezan za ivicu"""
@@ -129,9 +132,9 @@ class Graph:
         for edge in adj[v].values():
             yield edge
 
-    def insert_vertex(self, x=None):
+    def insert_vertex(self, x=None, attrs=None):
         """ Ubacuje i vraća novi čvor (Vertex) sa elementom x"""
-        v = self.Vertex(x)
+        v = self.Vertex(x, attrs)
         self._outgoing[v] = {}
         if self.is_directed():
             self._incoming[v] = {}  # mapa različitih vrednosti za dolazne čvorove

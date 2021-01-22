@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<animals>
+    <animal type="HORSE">
+        <subType fillTypeName="HORSE_TYPE_GREY" name="Andalusian" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="545" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="17000" trainingDifficulty="1.5" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_BROWN_WHITE" name="Paint" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="470" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="13000" trainingDifficulty="1.1" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_BEIGE" name="Haflinger" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="430" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="15000" trainingDifficulty="1.3" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_RED_BROWN" name="Quarter Horse" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="455" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="14000" trainingDifficulty="1.2" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_BROWN" name="Thoroughbred" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="450" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="18000" trainingDifficulty="1.6" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_BLACK" name="Black Arabian" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="410" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="21000" trainingDifficulty="1.8" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_DARK_BROWN" name="Tennessee Walking Horse" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="415" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="16000" trainingDifficulty="1.4" />
+        </subType>
+        <subType fillTypeName="HORSE_TYPE_LIGHT_BROWN" name="Morgan" >
+            <input straw="2000" water="0.09" food="0.04" />
+            <weight buy="420" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="10000" />
+            <output milk="0" manure="0.04" liquidManure="0.021" foodSpillage="0" />
+            <store dailyUpkeep="0" buyPrice="0" baseSellPrice="0" pricePerKg="0" priceDropAge="0" transportPrice="300" buyIsFemale="false" buyAge="1000" />
+            <livery cleanDuration="5000" income="12000" trainingDifficulty="1" />
+        </subType>
+    </animal>
+
+    <animal type="COW">
+        <subType fillTypeName="COW_TYPE_BROWN" name="Limousin" >
+            <input straw="1800" water="0.06" food="0.03" />
+            <weight buy="280" born="40.05" />
+            <growth gainBorn="0.405" gainPeakMale="1.8" gainPeakFemale="1.215" daysPeak="250" gainLevel="0.54" daysLevel="600" maxAge="3650" />
+            <output milk="0" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="500" pricePerKg="5.5" priceDropAge="1100" transportPrice="200" buyIsFemale="false" buyAge="230" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BROWN_WHITE" name="Ayrshire" >
+            <input straw="1800" water="0.06" food="0.03" />
+            <weight buy="410" born="32.4" />
+            <growth gainBorn="0.315" gainPeakMale="1.278" gainPeakFemale="0.7965" daysPeak="350" gainLevel="0.405" daysLevel="750" maxAge="3650" />
+            <output milk="28" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <breeding fertileAge="2" gestationPeriod="0.76" interval="0.24" averageLitterSize="1" variationLitterSize="0" birthRate="4" femalePercentage="0.9" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="250" pricePerKg="2.0" priceDropAge="1100" transportPrice="200" buyIsFemale="true" buyAge="700" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BLACK" name="Saler" >
+            <input straw="1800" water="0.06" food="0.03" />
+            <weight buy="275" born="38" />
+            <growth gainBorn="0.405" gainPeakMale="1.494" gainPeakFemale="1.00845" daysPeak="400" gainLevel="0.45" daysLevel="750" maxAge="3650" />
+            <output milk="0" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="300" pricePerKg="5.5" priceDropAge="1100" transportPrice="200" buyIsFemale="false" buyAge="300" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BLACK_WHITE" name="Holstein" >
+            <input straw="1800" water="0.06" food="0.03" />
+            <weight buy="490" born="40.5" />
+            <growth gainBorn="0.315" gainPeakMale="1.278" gainPeakFemale="0.8325" daysPeak="500" gainLevel="0.405" daysLevel="1000" maxAge="3650" />
+            <output milk="43" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <breeding fertileAge="2" gestationPeriod="0.76" interval="0.24" averageLitterSize="1" variationLitterSize="0" birthRate="4" femalePercentage="0.9" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="400" pricePerKg="2.5" priceDropAge="1100" transportPrice="200" buyIsFemale="true" buyAge="700" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BRAHMAN_BROWN" name="Brahman (brown)" >
+            <input straw="1800" water="0.06" food="0.028" />
+            <weight buy="260" born="29.25" />
+            <growth gainBorn="0.36" gainPeakMale="1.62" gainPeakFemale="1.08" daysPeak="500" gainLevel="0.3825" daysLevel="635" maxAge="3650" />
+            <output milk="0" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="400" pricePerKg="5.5" priceDropAge="1100" transportPrice="200" buyIsFemale="false" buyAge="300" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BRAHMAN_WHITE" name="Brahman (white)" >
+            <input straw="1800" water="0.06" food="0.028" />
+            <weight buy="260" born="29.25" />
+            <growth gainBorn="0.36" gainPeakMale="1.62" gainPeakFemale="1.08" daysPeak="500" gainLevel="0.3825" daysLevel="635" maxAge="3650" />
+            <output milk="0" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="400" pricePerKg="5.5" priceDropAge="1100" transportPrice="200" buyIsFemale="false" buyAge="300" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BRAHMAN_LIGHT_BROWN" name="Brahman (light brown)" >
+            <input straw="1800" water="0.06" food="0.028" />
+            <weight buy="260" born="29.25" />
+            <growth gainBorn="0.36" gainPeakMale="1.62" gainPeakFemale="1.08" daysPeak="500" gainLevel="0.3825" daysLevel="635" maxAge="3650" />
+            <output milk="0" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="400" pricePerKg="5.5" priceDropAge="1100" transportPrice="200" buyIsFemale="false" buyAge="300" />
+        </subType>
+        <subType fillTypeName="COW_TYPE_BRAHMAN_GREY" name="Brahman (grey)" >
+            <input straw="1800" water="0.06" food="0.028" />
+            <weight buy="260" born="29.25" />
+            <growth gainBorn="0.36" gainPeakMale="1.62" gainPeakFemale="1.08" daysPeak="500" gainLevel="0.3825" daysLevel="635" maxAge="3650" />
+            <output milk="0" manure="0.036" liquidManure="0.043" foodSpillage="0.05" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="400" pricePerKg="5.5" priceDropAge="1100" transportPrice="200" buyIsFemale="false" buyAge="300" />
+        </subType>
+    </animal>
+
+    <animal type="SHEEP">
+        <subType fillTypeName="SHEEP_TYPE_WHITE" name="Dorset" isSheep="true" >
+            <input straw="0" water="0.03" food="0.045" />
+            <weight buy="65" born="4.77" />
+            <growth gainBorn="0.27" gainPeakMale="0.45" gainPeakFemale="0.3825" daysPeak="56" gainLevel="0.045" daysLevel="330" maxAge="3650" />
+            <output milk="0" manure="0" liquidManure="0" foodSpillage="0.04" pallets="90" />
+            <breeding fertileAge="0.6" gestationPeriod="0.42" interval="0.5" averageLitterSize="1.55" variationLitterSize="1" birthRate="6" femalePercentage="0.5" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="200" pricePerKg="2.5" priceDropAge="100" transportPrice="100" buyIsFemale="true" buyAge="365" />
+        </subType>
+        <subType fillTypeName="SHEEP_TYPE_BROWN" name="Merino" isSheep="true" >
+            <input straw="0" water="0.03" food="0.045" />
+            <weight buy="50" born="5.45" />
+            <growth gainBorn="0.2475" gainPeakMale="0.4725" gainPeakFemale="0.3825" daysPeak="57" gainLevel="0.09" daysLevel="280" maxAge="3650" />
+            <output milk="0" manure="0" liquidManure="0" foodSpillage="0.04" pallets="240" />
+            <breeding fertileAge="0.6" gestationPeriod="0.42" interval="0.5" averageLitterSize="1.23" variationLitterSize="1" birthRate="6" femalePercentage="0.5" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="200" pricePerKg="2.5" priceDropAge="100" transportPrice="100" buyIsFemale="true" buyAge="365" />
+        </subType>
+        <subType fillTypeName="SHEEP_TYPE_BLACK_WHITE" name="Suffolk" isSheep="true" >
+            <input straw="0" water="0.03" food="0.045" />
+            <weight buy="70" born="6.255" />
+            <growth gainBorn="0.306" gainPeakMale="0.5175" gainPeakFemale="0.405" daysPeak="45" gainLevel="0.1125" daysLevel="400" maxAge="3650" />
+            <output milk="0" manure="0" liquidManure="0" foodSpillage="0.04" pallets="120" />
+            <breeding fertileAge="0.6" gestationPeriod="0.42" interval="0.5" averageLitterSize="1.65" variationLitterSize="1" birthRate="6" femalePercentage="0.5" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="200" pricePerKg="2.5" priceDropAge="100" transportPrice="100" buyIsFemale="true" buyAge="365" />
+        </subType>
+        <subType fillTypeName="SHEEP_TYPE_BLACK" name="Dorper" isSheep="true" >
+            <input straw="0" water="0.03" food="0.043" />
+            <weight buy="60" born="5.445" />
+            <growth gainBorn="0.2925" gainPeakMale="0.45" gainPeakFemale="0.3825" daysPeak="54" gainLevel="0.045" daysLevel="275" maxAge="3650" />
+            <output milk="0" manure="0" liquidManure="0" foodSpillage="0.04" pallets="0" />
+            <breeding fertileAge="0.6" gestationPeriod="0.42" interval="0.5" averageLitterSize="1.8" variationLitterSize="1" birthRate="6" femalePercentage="0.5" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="200" pricePerKg="2.5" priceDropAge="100" transportPrice="100" buyIsFemale="true" buyAge="365" />
+        </subType>
+    </animal>
+
+    <animal type="PIG">
+        <subType fillTypeName="PIG_TYPE_RED" name="Yorkshire" >
+            <input straw="600" water="0.03" food="0.0165" />
+            <weight buy="190" born="1.575" />
+            <growth gainBorn="0.243" gainPeakMale="0.981" gainPeakFemale="0.8829" daysPeak="134" gainLevel="0.18927" daysLevel="233" maxAge="2190" />
+            <output milk="0" manure="0.025" liquidManure="0.043" foodSpillage="0.06" />
+            <breeding fertileAge="0.4" gestationPeriod="0.32" interval="0.13" averageLitterSize="9.1" variationLitterSize="5" birthRate="8" femalePercentage="0.9" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="100" pricePerKg="3.5" priceDropAge="180" transportPrice="100" buyIsFemale="true" buyAge="365" />
+        </subType>
+        <subType fillTypeName="PIG_TYPE_WHITE" name="Gloucestershire Old Spot" >
+            <input straw="600" water="0.03" food="0.0165" />
+            <weight buy="24" born="1.125" />
+            <growth gainBorn="0.207" gainPeakMale="0.945" gainPeakFemale="0.8505" daysPeak="147.5" gainLevel="0.18819" daysLevel="238" maxAge="2190" />
+            <output milk="0" manure="0.025" liquidManure="0.043" foodSpillage="0.06" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="100" pricePerKg="3.5" priceDropAge="180" transportPrice="100" buyIsFemale="false" buyAge="56" />
+        </subType>
+        <subType fillTypeName="PIG_TYPE_BLACK_WHITE" name="Spotted" >
+            <input straw="600" water="0.03" food="0.0165" />
+            <weight buy="145" born="1.35" />
+            <growth gainBorn="0.216" gainPeakMale="0.9585" gainPeakFemale="0.86265" daysPeak="143" gainLevel="0.18855" daysLevel="243" maxAge="2190" />
+            <output milk="0" manure="0.025" liquidManure="0.043" foodSpillage="0.06" />
+            <breeding fertileAge="0.4" gestationPeriod="0.32" interval="0.13" averageLitterSize="7.5" variationLitterSize="5" birthRate="8" femalePercentage="0.9" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="100" pricePerKg="3.5" priceDropAge="180" transportPrice="100" buyIsFemale="true" buyAge="365" />
+        </subType>
+        <subType fillTypeName="PIG_TYPE_BLACK" name="Berkshire" >
+            <input straw="600" water="0.03" food="0.0165" />
+            <weight buy="26" born="1.575" />
+            <growth gainBorn="0.225" gainPeakMale="0.9675" gainPeakFemale="0.87075" daysPeak="138.5" gainLevel="0.18891" daysLevel="238" maxAge="2190" />
+            <output milk="0" manure="0.025" liquidManure="0.043" foodSpillage="0.06" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="150" pricePerKg="4.0" priceDropAge="180" transportPrice="100" buyIsFemale="false" buyAge="56" />
+        </subType>
+    </animal>
+
+    <animal type="CHICKEN">
+        <subType fillTypeName="CHICKEN_TYPE_WHITE" name="White Leghorn" isBird="true" >
+            <input straw="0" water="0.025" food="0.10323" />
+            <weight buy="2.1375" born="0.0196875" />
+            <growth gainBorn="0.0135" gainPeakMale="0.0225" gainPeakFemale="0.02025" daysPeak="100" gainLevel="0.0045" daysLevel="130" maxAge="1500" />
+            <output milk="0" manure="0.015" liquidManure="0" foodSpillage="0.02" pallets="30" />
+            <breeding fertileAge="0.4" gestationPeriod="0.06" interval="0.05" averageLitterSize="1" variationLitterSize="0" birthRate="10" femalePercentage="0.5" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="0.5" pricePerKg="2" priceDropAge="30" transportPrice="0" buyIsFemale="true" buyAge="140" />
+        </subType>
+        <subType fillTypeName="CHICKEN_TYPE_BLACK" name="Cornish Cross" isBird="true" >
+            <input straw="0" water="0.025" food="0.141435" />
+            <weight buy="0.18" born="0.03573" />
+            <growth gainBorn="0.018" gainPeakMale="0.099" gainPeakFemale="0.0855" daysPeak="50" gainLevel="0.025515" daysLevel="70" maxAge="90" />
+            <output milk="0" manure="0.015" liquidManure="0" foodSpillage="0.02" pallets="0" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="0.5" pricePerKg="2" priceDropAge="30" transportPrice="0" buyIsFemale="false" buyAge="7" />
+        </subType>
+        <subType fillTypeName="CHICKEN_TYPE_BROWN" name="Rhode Island Red" isBird="true" >
+            <input straw="0" water="0.025" food="0.10323" />
+            <weight buy="2.655" born="0.0196875" />
+            <growth gainBorn="0.0135" gainPeakMale="0.0225" gainPeakFemale="0.0216" daysPeak="140" gainLevel="0.0045" daysLevel="200" maxAge="1500" />
+            <output milk="0" manure="0.015" liquidManure="0" foodSpillage="0.02" pallets="25" />
+            <breeding fertileAge="0.4" gestationPeriod="0.06" interval="0.05" averageLitterSize="1" variationLitterSize="0" birthRate="10" femalePercentage="0.5" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="0.5" pricePerKg="2" priceDropAge="30" transportPrice="0" buyIsFemale="true" buyAge="140" />
+        </subType>
+        <subType fillTypeName="CHICKEN_TYPE_ROOSTER" name="Rooster" isBird="true" >
+            <input straw="0" water="0.03" food="0.1" />
+            <weight buy="6" born="0" />
+            <growth gainBorn="0" gainPeakMale="0" gainPeakFemale="0" daysPeak="0" gainLevel="0" daysLevel="0" maxAge="2920" />
+            <output milk="0" manure="0.015" liquidManure="0" foodSpillage="0.02" pallets="0" />
+            <store dailyUpkeep="0" buyPrice="1.2" baseSellPrice="0.5" pricePerKg="2" priceDropAge="30" transportPrice="0" buyIsFemale="false" buyAge="200" />
+        </subType>
+    </animal>
+</animals>

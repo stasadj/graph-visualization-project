@@ -18,8 +18,8 @@ class LoadDataService(Service):
         super().__init__()
 
     @abstractmethod
-    def load_data(self, path) -> str:
-        #povratna vrednost Graph
+    def load_data(self, path):
+        # povratna vrednost Graph
         pass
 
 
@@ -27,6 +27,11 @@ class VisualizeService(Service):
     # Dummy class, TODO change this class and its methods
     def __init__(self):
         super().__init__()
+
+    @abstractmethod
+    def visualize(self):
+        # povratna vrednost js kod
+        pass
 
 
 
