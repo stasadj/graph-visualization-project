@@ -76,12 +76,11 @@ class LoadXMLData(LoadDataService):
 
         for element in xml_dom.getiterator():
             tag = element.tag
-            text = element.text
             attrs = element.attrib
-            if text is not None:
-                attrs['elemText'] = text.strip()
+            if element.text is not None:
+                text = element.text.strip()
             else:
-                attrs['elemText'] = ''
-            element_vertex[element] = self.graph.insert_vertex(tag, attrs)
+                text = ''
+            element_vertex[element] = self.graph.insert_vertex(tag, attrs, text)
 
         return element_vertex

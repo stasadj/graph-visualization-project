@@ -13,34 +13,43 @@ class Graph:
     # ------------------------- Ugnježdena klasa Vertex -------------------------
     class Vertex:
         """ Struktura koja predstavlja čvor grafa."""
-        __slots__ = '_element', '_attributes'
+        __slots__ = '_element_type', '_attributes', '_id', '_name'
 
-        def __init__(self, x, attrs):
-            self._element = x
-            self._attributes = attrs
+        def __init__(self, el_type, attrs, idv, name):
+            self._element_type = el_type #element_type in our case is either Track/Playlist/Artist or some XML tag
+            self._attributes = attrs #dictionary od Vertex attributes (in our case for Track: albumcover, duration.. or xml attributes)
+            self._id = idv #unique vertex id - int
+            self._name = name #vertex name - in our case Track Name or text between xml tags
 
-        def element(self):
+        def element_type(self):
             """Vraća element vezan za čvor grafa."""
-            return self._element
+            return self._element_type
 
         def attributes(self):
             return self._attributes
+
+        def id(self):
+            return self._id
+
+        def name(self):
+            return self._name
 
         def __hash__(self):  # omogućava da Vertex bude ključ mape
             return hash(id(self))
 
         def __str__(self):
-            return str(self._element)
+            return str(self._element_type)
 
     # ------------------------- Ugnježdena klasa Edge -------------------------
     class Edge:
         """ Struktura koja predstavlja ivicu grafa """
-        __slots__ = '_origin', '_destination', '_element'
+        __slots__ = '_origin', '_destination', '_element', '_id'
 
-        def __init__(self, origin, destination, element):
+        def __init__(self, origin, destination, element, idv):
             self._origin = origin
             self._destination = destination
             self._element = element
+            self._id = idv
 
         def endpoints(self):
             """ Vraća torku (u,v) za čvorove u i v."""
@@ -132,9 +141,9 @@ class Graph:
         for edge in adj[v].values():
             yield edge
 
-    def insert_vertex(self, x=None, attrs=None):
+    def insert_vertex(self, x=None, attrs=None, name=None):
         """ Ubacuje i vraća novi čvor (Vertex) sa elementom x"""
-        v = self.Vertex(x, attrs)
+        v = self.Vertex(x, attrs, self.vertex_count()+1, name)
         self._outgoing[v] = {}
         if self.is_directed():
             self._incoming[v] = {}  # mapa različitih vrednosti za dolazne čvorove
@@ -148,6 +157,6 @@ class Graph:
         """
         if self.get_edge(u, v) is not None:  # uključuje i proveru greške
             raise ValueError('u and v are already adjacent')
-        e = self.Edge(u, v, x)
+        e = self.Edge(u, v, x, self.edge_count()+1)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
