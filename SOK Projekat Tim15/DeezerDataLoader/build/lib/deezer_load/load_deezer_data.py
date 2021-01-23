@@ -4,29 +4,18 @@ from core_django_app.services.services import LoadDataService
 import datetime
 import requests
 
-
 def convert_seconds(seconds):
-    """
-    Function which converts seconds to HH:mm:ss string format
-    :param seconds: seconds to be converted
-    :return: correct format string
-    """
     conversion = datetime.timedelta(seconds=seconds)
     return str(conversion)
 
-
 def fix_path(path):
-    """
-    Method which corrects deezer domain paths for the API
-    :param path: input path
-    :return: fixed path
-    """
     return path.replace("www", "api").replace("/us", "")
 
 
 class LoadDeezerData(LoadDataService):
     """
-    Class for extracting playlist data and stores it in a Graph
+    Klasa koja omogucava parsiranje Deezer plejliste
+     u strukturu grafa
     """
 
     def __init__(self):
@@ -41,24 +30,12 @@ class LoadDeezerData(LoadDataService):
         return 'DeezerDataLoader'
 
     def load_data(self, path) -> Graph:
-
-        """
-        Method for Deezer data extraction and Graph class object creation
-        :param path: a Deezer playlist path
-        :return: Graph object
-        """
         path = fix_path(path)
-        self.graph = Graph(True)
+        self.graph = Graph()
 
         # Making initial request
         playlist = requests.get(path).json()
-        #print(playlist)
-
-        # Checking if playlist is private
-        if playlist["error"] is not None:
-            print("private playlist!")
-            return None
-
+        print(playlist)
         playlist_attributes = {}
         playlist_attributes["title"] = playlist["title"]
         playlist_attributes["creator"] = playlist["creator"]["name"]
@@ -108,9 +85,7 @@ class LoadDeezerData(LoadDataService):
 
         print("Number of vertices: " + str(self.graph.vertex_count()))
         for v in self.graph.vertices():
-            print(v)
-        for e in self.graph.edges():
-            print(e)
+            print(v.name() + v.element_type())
         return self.graph
 
 
@@ -122,5 +97,5 @@ if __name__ == '__main__':
     some_playlist_path2 = "https://www.deezer.com/us/playlist/8433466142".replace("www", "api").replace("/us", "")
 
     deez = LoadDeezerData()
-    #deez.load_data(some_playlist_path2)
-    deez.load_data("https://www.deezer.com/us/playlist/8649081922")
+    deez.load_data(some_playlist_path2)
+

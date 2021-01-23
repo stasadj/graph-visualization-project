@@ -160,4 +160,3 @@ class Graph:
         e = self.Edge(u, v, x, self.edge_count()+1)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
-

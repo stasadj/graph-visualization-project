@@ -1,0 +1,3 @@
+[load.data]
+load_deezer_data = deezer_load.load_deezer_data:LoadDeezerData
+

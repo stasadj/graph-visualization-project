@@ -1,0 +1,11 @@
+setup.py
+deezer_data_loader.egg-info/PKG-INFO
+deezer_data_loader.egg-info/SOURCES.txt
+deezer_data_loader.egg-info/dependency_links.txt
+deezer_data_loader.egg-info/entry_points.txt
+deezer_data_loader.egg-info/namespace_packages.txt
+deezer_data_loader.egg-info/requires.txt
+deezer_data_loader.egg-info/top_level.txt
+deezer_data_loader.egg-info/zip-safe
+deezer_load/__init__.py
+deezer_load/load_deezer_data.py
