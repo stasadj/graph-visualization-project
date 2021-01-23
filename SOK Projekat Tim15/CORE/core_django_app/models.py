@@ -45,11 +45,11 @@ class Graph:
         """ Struktura koja predstavlja ivicu grafa """
         __slots__ = '_origin', '_destination', '_element', '_id'
 
-        def __init__(self, origin, destination, element, id):
+        def __init__(self, origin, destination, element, idv):
             self._origin = origin
             self._destination = destination
             self._element = element
-            self._id = id
+            self._id = idv
 
         def endpoints(self):
             """ Vraća torku (u,v) za čvorove u i v."""
