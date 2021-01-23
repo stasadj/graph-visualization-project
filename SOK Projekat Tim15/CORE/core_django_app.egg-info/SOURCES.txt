@@ -13,6 +13,8 @@ core_django_app.egg-info/not-zip-safe
 core_django_app.egg-info/requires.txt
 core_django_app.egg-info/top_level.txt
 core_django_app/migrations/__init__.py
+core_django_app/services/__init__.py
+core_django_app/services/services.py
 core_django_app/static/style.css
 core_django_app/templates/base.html
 core_django_app/templates/index.html

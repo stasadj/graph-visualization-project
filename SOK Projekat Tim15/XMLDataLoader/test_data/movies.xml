@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<Databases>
+	<Database name="MovieDatabase">
+		<Movie id="m1" rating="9.2" year="1972" oscars="3" ref="d1">The Godfather</Movie>
+		<Movie id="m2" rating="9.0" year="2008" oscars="2" ref="d2">The Dark Knight</Movie>
+		<Movie id="m3" rating="8.9" year="1994" oscars="1" ref="d3">Pulp Fiction</Movie>
+		<Movie id="m4" rating="8.8" year="1999" oscars="0" ref="d4">Fight Club</Movie>
+		<Movie id="m5" rating="8.8" year="2010" oscars="4" ref="d2">Inception</Movie>
+		<Movie id="m6" rating="8.7" year="1990" oscars="1" ref="d5">Goodfellas</Movie>
+		<Movie id="m7" rating="8.7" year="1975" oscars="5" ref="d6">One Flew Over the Cockoo's Nest</Movie>
+		<Movie id="m8" rating="8.6" year="2014" oscars="1" ref="d2">Interstellar</Movie>
+		<Movie id="m9" rating="8.3" year="1987" oscars="0" ref="d7">Full Metal Jacket</Movie>
+		<Movie id="m10" rating="8.3" year="1971" oscars="0" ref="d7">A Clockwork Orange</Movie>
+		<Movie id="m11" rating="8.3" year="1968" oscars="1" ref="d7">2001: A Space Odyssey</Movie>
+		<Movie id="m12" rating="8.3" year="1992" oscars="0" ref="d3">Reservoir Dogs</Movie>
+	</Database>
+
+	<Database name="DirectorDatabase">
+		<Director id="d1" oscars="5" born="7.4.1939." died="">Francis Ford Coppola</Director>
+		<Director id="d2" oscars="0" born="30.7.1970." died="">Christopher Nolan</Director>
+		<Director id="d3" oscars="2" born="27.3.1963." died="">Quentin Tarantino</Director>
+		<Director id="d4" oscars="0" born="28.8.1962." died="">David Fincher</Director>
+		<Director id="d5" oscars="1" born="17.11.1942." died="">Martin Scorsese</Director>
+		<Director id="d6" oscars="2" born="18.2.1932." died="13.4.2018.">Milos Forman</Director>
+		<Director id="d7" oscars="1" born="26.7.1928." died="7.3.1999.">Stanley Kubrick</Director>
+	</Database>
+</Databases>
