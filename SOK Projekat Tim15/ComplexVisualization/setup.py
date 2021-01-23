@@ -5,8 +5,8 @@ setup(
     packages=find_packages(),
     namespace_packages=['complex_visualization'],
     entry_points={
-        'load.data':
-            ['complex_visualization=complex_visualization.visualization:VisualizeService'],
+        'visualize.data':
+            ['complex_visualization=complex_visualization.visualization:ComplexVisualization'],
     },
     zip_safe=True
 )

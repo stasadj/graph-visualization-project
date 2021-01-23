@@ -1,6 +1,6 @@
 from core_django_app.services.services import VisualizeService
 
-class VisualizeService(VisualizeService):
+class ComplexVisualization(VisualizeService):
     # Dummy class, TODO change this class and its methods
     def __init__(self):
         super().__init__()

@@ -1,10 +1,5 @@
 //TODO u html staviti  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-//moramo prvo da napravimo liste za nodes i links
-//nodes imamo 3 tipa, track, playlist(root) i artist
-
-
-//slicno kao njihovo
 var nodes = {};
 var links = {};
 
