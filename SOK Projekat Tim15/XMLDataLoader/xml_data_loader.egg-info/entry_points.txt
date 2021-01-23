@@ -1,0 +1,3 @@
+[load.data]
+load_xml_data = xml_load.load_xml_data:LoadXMLData
+
