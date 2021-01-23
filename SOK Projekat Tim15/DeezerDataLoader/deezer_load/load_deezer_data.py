@@ -4,18 +4,29 @@ from core_django_app.services.services import LoadDataService
 import datetime
 import requests
 
+
 def convert_seconds(seconds):
+    """
+    Function which converts seconds to HH:mm:ss string format
+    :param seconds: seconds to be converted
+    :return: correct format string
+    """
     conversion = datetime.timedelta(seconds=seconds)
     return str(conversion)
 
+
 def fix_path(path):
+    """
+    Method which corrects deezer domain paths for the API
+    :param path: input path
+    :return: fixed path
+    """
     return path.replace("www", "api").replace("/us", "")
 
 
 class LoadDeezerData(LoadDataService):
-    """ Klasa koja omogucava parsiranje Deezer plejliste
-     u strukturu grafa
-
+    """
+    Class for extracting playlist data and stores it in a Graph
     """
 
     def __init__(self):
@@ -30,12 +41,18 @@ class LoadDeezerData(LoadDataService):
         return 'DeezerDataLoader'
 
     def load_data(self, path) -> Graph:
+
+        """
+        Method for Deezer data extraction and Graph class object creation
+        :param path: a Deezer playlist path
+        :return: Graph object
+        """
         path = fix_path(path)
         self.graph = Graph()
 
         # Making initial request
         playlist = requests.get(path).json()
-        print(playlist)
+        #print(playlist)
         playlist_attributes = {}
         playlist_attributes["title"] = playlist["title"]
         playlist_attributes["creator"] = playlist["creator"]["name"]
@@ -47,7 +64,6 @@ class LoadDeezerData(LoadDataService):
 
         # Now we iterate through the tracks of the playlist:
         for track in playlist["tracks"]["data"]:
-            # todo ovde kreiramo cvor pesme sa element track["title"]
             track_attributes = {}
             track_attributes["title"] = track["title_short"]
             track_attributes["duration"] = convert_seconds(track["duration"])
@@ -84,9 +100,9 @@ class LoadDeezerData(LoadDataService):
             #print(artist_attributes)
             #print(track_attributes)
 
-        print("Number of vertices: " + str(self.graph.vertex_count()))
-        for v in self.graph.vertices():
-            print(v.name() + v.element_type())
+        # print("Number of vertices: " + str(self.graph.vertex_count()))
+        # for v in self.graph.vertices():
+        #     print(v.name() + v.element_type())
         return self.graph
 
 
@@ -94,7 +110,6 @@ class LoadDeezerData(LoadDataService):
 
 
 if __name__ == '__main__':
-    some_album_path = "https://api.deezer.com/album/183019992"
     some_playlist_path = "https://api.deezer.com/playlist/6033056424"
     some_playlist_path2 = "https://www.deezer.com/us/playlist/8433466142".replace("www", "api").replace("/us", "")
 
