@@ -1,0 +1,3 @@
+build/
+core_django_app.egg-info/
+dist/
