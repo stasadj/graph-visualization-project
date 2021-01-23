@@ -100,9 +100,11 @@ class LoadDeezerData(LoadDataService):
             #print(artist_attributes)
             #print(track_attributes)
 
-        # print("Number of vertices: " + str(self.graph.vertex_count()))
+        print("Number of vertices: " + str(self.graph.vertex_count()))
         # for v in self.graph.vertices():
-        #     print(v.name() + v.element_type())
+        #     print(v)
+        # for e in self.graph.edges():
+        #     print(e)
         return self.graph
 
 
@@ -114,5 +116,5 @@ if __name__ == '__main__':
     some_playlist_path2 = "https://www.deezer.com/us/playlist/8433466142".replace("www", "api").replace("/us", "")
 
     deez = LoadDeezerData()
-    deez.load_data(some_playlist_path2)
-
+    #deez.load_data(some_playlist_path2)
+    #deez.load_data("https://www.deezer.com/us/playlist/8649081922")
