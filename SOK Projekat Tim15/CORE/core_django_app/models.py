@@ -15,10 +15,10 @@ class Graph:
         """ Struktura koja predstavlja čvor grafa."""
         __slots__ = '_element_type', '_attributes', '_id', '_name'
 
-        def __init__(self, el_type, attrs, id, name):
+        def __init__(self, el_type, attrs, idv, name):
             self._element_type = el_type #element_type in our case is either Track/Playlist/Artist or some XML tag
             self._attributes = attrs #dictionary od Vertex attributes (in our case for Track: albumcover, duration.. or xml attributes)
-            self._id = id #unique vertex id - int
+            self._id = idv #unique vertex id - int
             self._name = name #vertex name - in our case Track Name or text between xml tags
 
         def element_type(self):
@@ -45,11 +45,11 @@ class Graph:
         """ Struktura koja predstavlja ivicu grafa """
         __slots__ = '_origin', '_destination', '_element', '_id'
 
-        def __init__(self, origin, destination, element, id):
+        def __init__(self, origin, destination, element, idv):
             self._origin = origin
             self._destination = destination
             self._element = element
-            self._id = id
+            self._id = idv
 
         def endpoints(self):
             """ Vraća torku (u,v) za čvorove u i v."""
