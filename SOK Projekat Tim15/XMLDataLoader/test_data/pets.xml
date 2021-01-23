@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<household>
+    <pets>
+        <pet type="cat">
+            <breed>Domestic Short Hair</breed>
+            <name>Daisy</name>
+            <color>Brown</color>
+            <weight>16 pounds</weight>
+        </pet>
+        <pet type="cat">
+            <breed>Domestic Short Hair</breed>
+            <name>Hana</name>
+            <color>BrownishBlack</color>
+            <weight>6 pounds</weight>
+        </pet>
+        <pet type="dog">
+            <breed>Australian Shepard</breed>
+            <name>Nellie</name>
+            <color>Blue Merle</color>
+            <weight>24 pounds</weight>
+        </pet>
+    </pets>
+</household>
