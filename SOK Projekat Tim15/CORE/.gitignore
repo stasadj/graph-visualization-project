@@ -1,4 +1,4 @@
 build/
 core_django_app.egg-info/
 dist/
-core_django_app/__pychache__/
+core_django_app/__pycache__/
