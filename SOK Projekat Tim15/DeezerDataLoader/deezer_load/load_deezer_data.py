@@ -55,7 +55,7 @@ class LoadDeezerData(LoadDataService):
         #print(playlist)
 
         # Checking if playlist is private
-        if playlist["error"] is not None:
+        if "error" in playlist:
             print("private playlist!")
             return None
 
@@ -93,18 +93,19 @@ class LoadDeezerData(LoadDataService):
             artist_attributes["name"] = track["artist"]["name"]
 
             #TODO: Rethink getting the artist picture, as we have to send a new request for each track -> time consuming
-            artistJson = requests.get(track["artist"]["link"].replace("www", "api")).json()
-            artist_attributes["picture"] = artistJson["picture_medium"]
+            if playlist["nb_tracks"] <= 70:
+                artistJson = requests.get(track["artist"]["link"].replace("www", "api")).json()
+                artist_attributes["picture"] = artistJson["picture_medium"]
 
             # We add the artist vertex to graph and connect it to the track vertex
-            artist_vertex = self.graph.insert_vertex(artistJson["type"], artist_attributes, track["artist"]["name"])
+            artist_vertex = self.graph.insert_vertex(track["artist"]["type"], artist_attributes, track["artist"]["name"])
             self.graph.insert_edge(track_vertex, artist_vertex)
 
             # Now we save the artist vertex in case another track in the playlist has the same artist
             self.artists[track["artist"]["id"]] = artist_vertex
 
-            #print(artist_attributes)
-            #print(track_attributes)
+            print(artist_attributes)
+            print(track_attributes)
 
         print("Number of vertices: " + str(self.graph.vertex_count()))
         for v in self.graph.vertices():
@@ -122,5 +123,5 @@ if __name__ == '__main__':
     some_playlist_path2 = "https://www.deezer.com/us/playlist/8433466142".replace("www", "api").replace("/us", "")
 
     deez = LoadDeezerData()
-    #deez.load_data(some_playlist_path2)
-    deez.load_data("https://www.deezer.com/us/playlist/8649081922")
+    #deez.load_data(some_playlist_path)
+    #deez.load_data("https://www.deezer.com/us/playlist/8649081922")
