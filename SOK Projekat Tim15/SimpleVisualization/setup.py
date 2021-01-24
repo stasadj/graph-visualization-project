@@ -6,7 +6,7 @@ setup(
     namespace_packages=['simple_visualization'],
     entry_points={
         'visualize.data':
-            ['simple_visualization=simple_visualization.visualization:SimpleVisualization'],
+            ['simple_visualization=simple_visualization.simple_visualization:SimpleVisualization'],
     },
     zip_safe=True
 )
