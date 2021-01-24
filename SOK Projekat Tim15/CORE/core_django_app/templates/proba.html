@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+      {% if plugini_ucitavanje %}
+         {% for k, v in plugini_ucitavanje.items %}
+            <p>{{k}} {{v.name}}</p>
+
+         {% endfor %}
+      {% else %}
+        <h3>Nema prepoznatih plugina za ucitavanje</h3>
+      {% endif %}
+  </div>
+
+</body>
+</html>
