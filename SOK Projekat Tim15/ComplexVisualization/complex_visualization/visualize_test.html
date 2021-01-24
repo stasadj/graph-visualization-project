@@ -1,5 +1,37 @@
-//TODO u html staviti  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
 
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: black	;
+  stroke-width: 0px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    width: 80px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: #8fb3de;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+</style>
+<svg width="800" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<div class="tooltip"></div>
+<script>
 
 //kreiramo svg na kome se sve renderuje
 var svg = d3.select("svg"),
@@ -200,3 +232,4 @@ function tickActions() {
     text
         .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
+</script>

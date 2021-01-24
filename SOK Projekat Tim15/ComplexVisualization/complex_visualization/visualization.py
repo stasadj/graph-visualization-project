@@ -1,4 +1,5 @@
 from core_django_app.services.services import VisualizeService
+import pkg_resources
 
 class ComplexVisualization(VisualizeService):
     # Dummy class, TODO change this class and its methods
@@ -10,5 +11,4 @@ class ComplexVisualization(VisualizeService):
         self.graph_visualization = graph
 
     def visualize(self):
-        # povratna vrednost js kod
-        pass
+        return pkg_resources.resource_string(__name__, 'simple_visualization_graph.js')
