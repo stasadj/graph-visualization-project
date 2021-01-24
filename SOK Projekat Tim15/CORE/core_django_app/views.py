@@ -26,12 +26,12 @@ def odabir_plagina(request):
 
         if odabran_ucitavanje == "Odaberi" or odabran_vizualizacija == "Odaberi":
             print("Niste dobro odabrali plagine ili ih ni nema :(")
-            #return redirect('index') #ovde odkomentarisati cim budemo imali neki plagin za vizuelizaciju
+            return redirect('index')
 
-        #else: #i ovde odkomentarisi
+        else:
             config = apps.get_app_config('core_django_app')
             config.chosen_load_plugin = config.load_data_plugins[odabran_ucitavanje]
-            #config.chosen_visualize_plugin = config.visualize_data_plugins[odabran_vizualizacija] #i ovde odkomentarisi
+            config.chosen_visualize_plugin = config.visualize_data_plugins[odabran_vizualizacija]
             return render(request, 'unos_parametara.html', {"title": "Unos parametara", "id": odabran_ucitavanje})
 
 
@@ -42,15 +42,24 @@ def pokretanje_plagina(request):
     if putanja is None or putanja == "":
         return redirect('index')
 
+    #Initiating data loading
     plugin = apps.get_app_config('core_django_app').chosen_load_plugin
     plugin.load_data(putanja)
 
-    #plugin.graph -> tu ce biti rezultati loada
-    for v in plugin.graph.vertices():
-        print(v)
+    config = apps.get_app_config('core_django_app')
+    config.graph = plugin.graph
 
-    #TODO OVDE POKRENUTI PLAGIN ZA VIZUALIZACIJU UMESTO OVOG REDIRECTA!!!!
-    return redirect('index')
+    #for v in plugin.graph.vertices():
+     #   print(v)
+
+    #TODO: OVDE POKRENUTI PLAGIN ZA VIZUALIZACIJU:
+    if config.chosen_visualize_plugin.plugin_id() == "SimpleVisualization":
+        return render(request, "visualization_proba.html", {"title": "Index",
+                                                            "plagin": config.chosen_visualize_plugin,
+                                                            "graf": config.graph})
+    else:
+        # TODO: ovde ce ici za Jelenin ComplexVisualisation
+        return redirect('index')
 
 
 
@@ -64,4 +73,12 @@ def prikazi_plagine(request):
     return render(request, "proba.html", {"title":"Index", "plugini_ucitavanje":plagini_ucitavanje,
                                           "plugini_vizualizacija": plagini_vizualizacija})
 
+
+
+# # test SimpleVisualizaiton komponente sa Deezer podacima
+# def simple_vis_proba(request):
+#     config = apps.get_app_config('core_django_app')
+#     plagin = config.visualize_data_plugins['SimpleVisualization']
+#     graf = config.graph
+#     return render(request, "visualization_proba.html", {"title": "Index", "plagin": plagin, "graf": graf})
 
