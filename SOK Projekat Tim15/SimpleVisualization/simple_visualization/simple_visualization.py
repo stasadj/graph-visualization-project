@@ -1,5 +1,5 @@
 from core_django_app.services.services import VisualizeService
-
+import pkg_resources
 
 class SimpleVisualization(VisualizeService):
 
@@ -10,7 +10,7 @@ class SimpleVisualization(VisualizeService):
         return "SimpleVisualization"
 
     def visualize(self):
-        return ""
+        return pkg_resources.resource_string(__name__, 'simple_visualization.py')
 
 
 
