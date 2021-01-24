@@ -7,6 +7,8 @@ class CoreDjangoAppConfig(AppConfig):
     verbose_name = 'CORE DJANGO APP'
     load_data_plugins = {}
     visualize_data_plugins = {}
+    chosen_load_plugin = None
+    chose_visualize_plugin = None
 
     def ready(self):
         self.load_data_plugins = self.load_plugins("load.data")
