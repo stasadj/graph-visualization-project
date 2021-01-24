@@ -1,9 +1,15 @@
-//create somewhere to put the force directed graph
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
 var radius = 15;
+
+// Colour
+var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
+
+var randomTcColour = function() {
+  return Math.floor(Math.random() * tcColours.length);
+};
 
 
 //set up the simulation and add forces
@@ -39,7 +45,7 @@ var link = g.append("g")
     .data(links_data)
     .enter().append("line")
       .attr("stroke-width", 2)
-      .style("stroke", linkColour);
+      .style("stroke", tcColours[randomTcColour()]);
 
 //draw circles for the nodes
 var node = g.append("g")
@@ -49,7 +55,20 @@ var node = g.append("g")
         .enter()
         .append("circle")
         .attr("r", radius)
-        .attr("fill", circleColour);
+        .attr("fill", tcColours[randomTcColour()]);
+
+var label = g.append("g")
+    .attr("class", "label")
+    .selectAll(null)
+    .data(nodes_data)
+    .enter()
+    .append("text")
+    .text(empty_string)
+    .style("text-anchor", "middle")
+    .style("fill", "#555")
+    .style("font-family", "Arial")
+    .style("font-size", 12)
+    .style("font-weight", "bold");
 
 
 //add drag capabilities
@@ -58,7 +77,9 @@ var drag_handler = d3.drag()
 	.on("drag", drag_drag)
 	.on("end", drag_end);
 
+
 drag_handler(node);
+drag_handler(label);
 
 
 //add zoom capabilities
@@ -69,25 +90,14 @@ zoom_handler(svg);
 
 /** Functions **/
 
-//Function to choose what color circle we have
-function circleColour(d){
-	if(d.element_type == "Track"){
-		return "green";
-    } 
-    if(d.element_type == "Playlist"){
-		return "blue";
-    } 
-    if(d.element_type == "Artist"){
-		return "pink";
-    } 
-	return "red";
+function empty_string(d){
+	if(d.name ==""){
+		return d.element_type;
+	} else {
+		return d.name;
+	}
 }
 
-//Function to choose the line colour and thickness
-function linkColour(d)
-{
-	return "red";
-}
 
 //Drag functions
 //d is the node
@@ -126,4 +136,7 @@ function tickActions() {
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
+
+    label.attr("x", function(d){ return d.x; })
+        .attr("y", function (d) {return d.y ; });
 }
