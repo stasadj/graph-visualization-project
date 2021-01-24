@@ -38,7 +38,7 @@ class Graph:
             return hash(id(self))
 
         def __str__(self):
-            return str(self._element_type)
+            return str(self._element_type) + ": " + str(self._name)
 
     # ------------------------- Ugnježdena klasa Edge -------------------------
     class Edge:

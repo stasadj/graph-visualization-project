@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 
-#dina napravila fajl, valjda je okej
 urlpatterns = [
-    path('', views.index, name='index'), #ovde cemo dodavati jos
-    ]
+    path('', views.index, name='index'),
+    path('plagini/', views.prikazi_plagine, name="plagini"), #posle obrisati, sluzi za ispis instaliranih plagina, dobar test da li su dobro ucitani
+
+]
