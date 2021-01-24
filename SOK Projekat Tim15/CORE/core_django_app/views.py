@@ -16,6 +16,13 @@ def index(request):
 def prikazi_plagine(request):
     config = apps.get_app_config('core_django_app')
     plagini = config.load_data_plugins
-    return render(request, "proba.html", {"title":"Index", "plugini_ucitavanje":plagini})
+    return render(request, "proba.html", {"title": "Index", "plugini_ucitavanje": plagini})
 
+
+# test SimpleVisualizaiton komponente sa Deezer podacima
+def simple_vis_proba(request):
+    config = apps.get_app_config('core_django_app')
+    plagin = config.visualize_data_plugins['SimpleVisualization']
+    graf = config.graph
+    return render(request, "visualization_proba.html", {"title": "Index", "plagin": plagin, "graf": graf})
 
