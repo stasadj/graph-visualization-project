@@ -4,7 +4,6 @@ var svg = d3.select("svg"),
 
 var radius = 15;
 
-// Colour
 var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
 
 var randomTcColour = function() {
@@ -12,7 +11,6 @@ var randomTcColour = function() {
 };
 
 
-//set up the simulation and add forces
 var simulation = d3.forceSimulation()
 					.nodes(nodes_data);
 
@@ -31,14 +29,11 @@ simulation
  ;
 
 
-//add tick instructions:
 simulation.on("tick", tickActions );
 
-//add encompassing group for the zoom
 var g = svg.append("g")
     .attr("class", "everything");
 
-//draw lines for the links
 var link = g.append("g")
       .attr("class", "links")
     .selectAll("line")
@@ -47,7 +42,6 @@ var link = g.append("g")
       .attr("stroke-width", 2)
       .style("stroke", tcColours[randomTcColour()]);
 
-//draw circles for the nodes
 var node = g.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
@@ -71,7 +65,6 @@ var label = g.append("g")
     .style("font-weight", "bold");
 
 
-//add drag capabilities
 var drag_handler = d3.drag()
 	.on("start", drag_start)
 	.on("drag", drag_drag)
@@ -82,13 +75,11 @@ drag_handler(node);
 drag_handler(label);
 
 
-//add zoom capabilities
 var zoom_handler = d3.zoom()
     .on("zoom", zoom_actions);
 
 zoom_handler(svg);
 
-/** Functions **/
 
 function empty_string(d){
 	if(d.name ==""){
@@ -99,15 +90,13 @@ function empty_string(d){
 }
 
 
-//Drag functions
-//d is the node
 function drag_start(d) {
  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
 }
 
-//make sure you can't drag the circle outside the box
+
 function drag_drag(d) {
   d.fx = d3.event.x;
   d.fy = d3.event.y;
@@ -119,18 +108,18 @@ function drag_end(d) {
   d.fy = null;
 }
 
-//Zoom functions
+
 function zoom_actions(){
     g.attr("transform", d3.event.transform)
 }
 
 function tickActions() {
-    //update circle positions each tick of the simulation
+
        node
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
-    //update link positions
+
     link
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
