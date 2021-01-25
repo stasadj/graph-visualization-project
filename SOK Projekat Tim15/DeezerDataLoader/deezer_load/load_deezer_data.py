@@ -21,7 +21,7 @@ def fix_path(path):
     :param path: input path
     :return: fixed path
     """
-    return path.replace("www", "api").replace("/us", "")
+    return path.replace("www", "api").replace("/us", "").replace("/en", "")
 
 
 class LoadDeezerData(LoadDataService):

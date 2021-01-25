@@ -9,7 +9,7 @@
 <script>
 var nodes_data =  [
     {% for e in graf.vertices %}
-    {"id" : {{e.id}}, "name" : "{{e.name}}", "element_type" : "{{e.element_type}}", "atributes" : "" },
+    {"id" : {{e.id}}, "name" : "{{e.name}}", "element_type" : "{{e.element_type}}", "atributes" : "{{e.get_json_attributes}}" },
     {% endfor %}
     ]
 
