@@ -2,7 +2,7 @@ var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-var radius = 15;
+var radius = 30;
 
 var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
 
@@ -10,10 +10,6 @@ var randomTcColour = function() {
   return Math.floor(Math.random() * tcColours.length);
 };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 var simulation = d3.forceSimulation()
 					.nodes(nodes_data);
 
@@ -21,7 +17,7 @@ var link_force =  d3.forceLink(links_data)
                         .id(function(d) { return d.id; });
 
 var charge_force = d3.forceManyBody()
-    .strength(-100);
+    .strength(-3000);
 
 var center_force = d3.forceCenter(width / 2, height / 2);
 
@@ -31,10 +27,6 @@ simulation
     .force("links",link_force)
  ;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 simulation.on("tick", tickActions );
 
 var g = svg.append("g")
@@ -67,13 +59,9 @@ var label = g.append("g")
     .style("text-anchor", "middle")
     .style("fill", "#555")
     .style("font-family", "Arial")
-    .style("font-size", 12)
+    .style("font-size", 20)
     .style("font-weight", "bold");
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 var drag_handler = d3.drag()
 	.on("start", drag_start)
 	.on("drag", drag_drag)
@@ -83,41 +71,21 @@ var drag_handler = d3.drag()
 drag_handler(node);
 drag_handler(label);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 var zoom_handler = d3.zoom()
     .on("zoom", zoom_actions);
 
 zoom_handler(svg);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 function empty_string(d){
-	if(d.name ==""){
-		return d.element_type;
-	} else {
-		return d.name;
-	}
+	return d.element_type + ": " + d.name;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 function drag_start(d) {
  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 function drag_drag(d) {
   d.fx = d3.event.x;
   d.fy = d3.event.y;
@@ -129,10 +97,6 @@ function drag_end(d) {
   d.fy = null;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 function zoom_actions(){
     g.attr("transform", d3.event.transform)
 }
@@ -143,10 +107,6 @@ function tickActions() {
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
     link
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
