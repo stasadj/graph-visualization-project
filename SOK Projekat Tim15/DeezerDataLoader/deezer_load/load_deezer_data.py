@@ -21,7 +21,7 @@ def fix_path(path):
     :param path: input path
     :return: fixed path
     """
-    return path.replace("www", "api").replace("/us", "")
+    return path.replace("www", "api").replace("/us", "").replace("/en", "")
 
 
 class LoadDeezerData(LoadDataService):
@@ -49,6 +49,7 @@ class LoadDeezerData(LoadDataService):
         """
         path = fix_path(path)
         self.graph = Graph(True)
+        self.artists = {}
 
         # Making initial request
         playlist = requests.get(path).json()
@@ -104,14 +105,12 @@ class LoadDeezerData(LoadDataService):
             # Now we save the artist vertex in case another track in the playlist has the same artist
             self.artists[track["artist"]["id"]] = artist_vertex
 
-            print(artist_attributes)
-            print(track_attributes)
 
-        print("Number of vertices: " + str(self.graph.vertex_count()))
-        for v in self.graph.vertices():
-            print(v)
-        for e in self.graph.edges():
-            print(e)
+        # print("Number of vertices: " + str(self.graph.vertex_count()))
+        # for v in self.graph.vertices():
+        #     print(v)
+        # for e in self.graph.edges():
+        #     print(e)
         return self.graph
 
 

@@ -10,6 +10,10 @@ var randomTcColour = function() {
   return Math.floor(Math.random() * tcColours.length);
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 var simulation = d3.forceSimulation()
 					.nodes(nodes_data);
 
@@ -27,6 +31,10 @@ simulation
     .force("links",link_force)
  ;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 simulation.on("tick", tickActions );
 
 var g = svg.append("g")
@@ -62,6 +70,10 @@ var label = g.append("g")
     .style("font-size", 12)
     .style("font-weight", "bold");
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 var drag_handler = d3.drag()
 	.on("start", drag_start)
 	.on("drag", drag_drag)
@@ -71,11 +83,19 @@ var drag_handler = d3.drag()
 drag_handler(node);
 drag_handler(label);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 var zoom_handler = d3.zoom()
     .on("zoom", zoom_actions);
 
 zoom_handler(svg);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 function empty_string(d){
 	if(d.name ==""){
 		return d.element_type;
@@ -84,12 +104,20 @@ function empty_string(d){
 	}
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 function drag_start(d) {
  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 function drag_drag(d) {
   d.fx = d3.event.x;
   d.fy = d3.event.y;
@@ -101,6 +129,10 @@ function drag_end(d) {
   d.fy = null;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 function zoom_actions(){
     g.attr("transform", d3.event.transform)
 }
@@ -111,6 +143,10 @@ function tickActions() {
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
     link
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })

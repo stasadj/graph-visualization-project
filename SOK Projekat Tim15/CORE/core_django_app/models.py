@@ -1,3 +1,4 @@
+import json
 from django.db import models
 
 # Create your models here.
@@ -39,6 +40,9 @@ class Graph:
 
         def __str__(self):
             return str(self._element_type) + ": " + str(self._name)
+
+        def get_json_attributes(self):
+            return json.dumps(self.attributes())
 
     # ------------------------- Ugnježdena klasa Edge -------------------------
     class Edge:
