@@ -17,7 +17,7 @@ var link_force =  d3.forceLink(links_data)
                         .id(function(d) { return d.id; });
 
 var charge_force = d3.forceManyBody()
-    .strength(-3000);
+    .strength(-3500);
 
 var center_force = d3.forceCenter(width / 2, height / 2);
 
