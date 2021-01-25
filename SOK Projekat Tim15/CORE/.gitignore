@@ -2,3 +2,4 @@ build/
 core_django_app.egg-info/
 dist/
 core_django_app/__pycache__/
+core_django_app/migrations/__pycache__/

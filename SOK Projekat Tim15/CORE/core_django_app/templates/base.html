@@ -13,14 +13,40 @@
                   <li>
                       <a href="{% url 'index' %}">Home</a>
                   </li>
+                      <form id="odabirPlaginaForma" method='GET' action="{% url 'odabir_plagina' %}">
+                          {% csrf_token %}
 
+                          <select name="odabran_ucitavanje">
+                              <option value="Odaberi">Odaberi</option>
+                              {% if plugini_ucitavanje %}
+                                 {% for k in plugini_ucitavanje.keys %}
+                                    <option value="{{k}}">{{k}}</option>
+                                 {% endfor %}
+                              {% endif %}
+                          </select>
+
+                  </li>
+
+                  <li>
+                      <select name="odabran_vizualizacija">
+                          <option value="Odaberi">Odaberi</option>
+
+                          {% if plugini_vizualizacija %}
+                             {% for k in plugini_vizualizacija.keys %}
+                                <option value="{{k}}">{{k}}</option>
+                             {% endfor %}
+                          {% endif %}
+                      </select>
+                  </li>
+                  <input type="submit" value="Odaberi">
+                  </form>
               </ul>
               {% block links %}{% endblock %}
           </div>
           <div class="center">
               {% block content %}{% endblock %}
           </div>
-          <div class="footer">SOK projekat - Tim15</div>
+          <div class="footer">SOK projekat - Tim 15 - 2020/2021</div>
 </div>
 </body>
 </html>

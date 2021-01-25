@@ -1,3 +1,4 @@
 build/
 simple_visualization.egg-info/
 dist/
+simple_visualization/__pycache__/
