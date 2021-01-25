@@ -10,4 +10,5 @@ class SimpleVisualization(VisualizeService):
         return "SimpleVisualization"
 
     def visualize(self):
-        return pkg_resources.resource_string(__name__, 'simple_visualize_graph.js')
+        pom = pkg_resources.resource_string(__name__, "simple_visualize_graph.js")
+        return str(pom, "UTF-8")
