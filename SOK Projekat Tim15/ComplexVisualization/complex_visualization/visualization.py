@@ -5,10 +5,10 @@ class ComplexVisualization(VisualizeService):
     # Dummy class, TODO change this class and its methods
     def __init__(self):
         super().__init__()
-        self.graph_visualization = None
+        self.graph = None
 
     def add_graph(self,graph):
-        self.graph_visualization = graph
+        self.graph = graph
 
     def visualize(self):
         return pkg_resources.resource_string(__name__, 'simple_visualization_graph.js')
