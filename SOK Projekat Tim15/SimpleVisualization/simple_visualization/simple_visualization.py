@@ -1,6 +1,7 @@
 from core_django_app.services.services import VisualizeService
 import pkg_resources
 
+
 class SimpleVisualization(VisualizeService):
 
     def plugin_id(self):

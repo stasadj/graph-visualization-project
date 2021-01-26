@@ -59,7 +59,10 @@ def pokretanje_plagina(request):
                                                             "graf": config.graph})
     else:
         # TODO: ovde ce ici za Jelenin ComplexVisualisation
-        return redirect('index')
+        if config.chosen_visualize_plugin.plugin_id() == "ComplexVisualization":
+            return render(request, "visualization_proba.html", {"title": "Index",
+                                                            "plagin": config.chosen_visualize_plugin,
+                                                            "graf": config.graph})
 
 
 

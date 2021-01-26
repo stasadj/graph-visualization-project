@@ -29,11 +29,15 @@
             border-radius: 8px;
             pointer-events: none;
         }
+
+
+        html, body { margin:0; padding:0; overflow:hidden }
+        svg { position:fixed; top:0; left:0; height:100%; width:100% }
     </style>
 </head>
 
 <body>
-<svg width="800" height="500"></svg>
+<svg></svg>
 <div class="tooltip"></div>
 <script>
 var nodes_data =  [

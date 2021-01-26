@@ -1,9 +1,29 @@
 
+//dobijamo visinu/sirinu broswer prozora
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
+
+function getHeight() {
+  return Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.documentElement.clientHeight
+  );
+}
 
 //kreiramo svg na kome se sve renderuje
 var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+    width = getWidth(),
+    height = getHeight();
 
 var radius = 15;
 
@@ -18,7 +38,7 @@ var link_force =  d3.forceLink(links_data).id(function(d) { return d.id; });
 
 var charge_force = d3.forceManyBody().strength(-400);
 
-var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar objekta
+var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar containera
 
 simulation.force("charge_force", charge_force)
           .force("center_force", center_force)
@@ -41,7 +61,15 @@ var link = g.append("g")
     .style("stroke", linkColour);
 
 
-
+function circleColour(d){
+	if(d.element_type === "playlist"){
+		return "blue";
+	} else if (d.element_type === "artist"){
+		return "pink";
+	} else{
+        return "purple";
+    }
+}
 
 //draw circles for the nodes
 var node = g.append("g")
@@ -70,14 +98,6 @@ var text = g.append("g")
     .style("font-family", "sans-serif")
     .style("font-size", "0.7em")
     .text(function (d) { return d.name; });
-
-// node.append("svg:image")
-//     .attr("class", "circle")
-//     .attr("xlink:href", "https://github.com/favicon.ico")
-//     .attr("x", "-8px")
-//     .attr("y", "-8px")
-//     .attr("width", "16px")
-//     .attr("height", "16px");
 
 
 //add drag capabilities
@@ -122,16 +142,26 @@ function handleMouseOut(d, i) {
 
 function handleMouseClick(d,i){}
 
+
+//"title": "UKF 2018 DRAMnBASS", "creator": "Spotty", "duration": "1:44:11", "picture": "https://api.deezer.com/playlist/4268172382/image"
 function toolBoxIn(d){
     if(d.attrs !== ""){
         div.style("visibility", "visible")
         .transition()
         .duration(200)
         .style("opacity", .9);
-        var html = "Atributi "+d.atributes+"<br/>";
+        if(d.element_type === "track")
+            var html = `Duration: ${d.atributes.duration}`;
+        else if(d.element_type === "artist")
+            var html = `Name: ${d.atributes.name} <br/>`;
+        else{
+             var html = `Duration: ${d.atributes.duration}`;
+        }
+
+        //uzimamo poziciju misa za koordinate tooltipa
         div.html(html)
-            .style("left", (d.x + 15) + "px")
-            .style("top", (d.y - 30) + "px");
+        .style("top", (d3.event.pageY + 16) + "px")
+        .style("left", (d3.event.pageX + 16) + "px");
     }
 }
 
@@ -144,15 +174,7 @@ function toolBoxOut(d){
         });
 }
 
-function circleColour(d){
-	if(d.element_type =="playlist"){
-		return "blue";
-	} else if (d.element_type =="artist"){
-		return "pink";
-	} else{
-        return "purple";
-    }
-}
+
 
 function linkColour(d){
 	return "blue";
