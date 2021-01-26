@@ -1,4 +1,3 @@
-//TODO u html staviti  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 
 //kreiramo svg na kome se sve renderuje
@@ -10,23 +9,6 @@ var radius = 15;
 
 //el_type, attrs, idv, name
 
-var nodes_data =  [
-    {"id":1, "el_type": "playlist", "attrs": "", "name": "electronic"},
-    {"id":2, "el_type": "track", "attrs": "4min", "name": "Underwater"},
-    {"id":3, "el_type": "track", "attrs": "2min", "name": "Sundream"},
-    {"id":4, "el_type": "track", "attrs": "3min", "name": "Castles in the sky"},
-    {"id":5, "el_type": "artist", "attrs": "", "name": "i_o"},
-    {"id":6, "el_type": "artist", "attrs": "", "name": "Rüfüs du sol"}
-    ]
-
-var links_data = [
-	{"source": 1, "target": 2},
-    {"source": 1, "target": 3},
-    {"source": 1, "target": 4},
-    {"source": 2, "target": 6},
-    {"source": 3, "target": 6},
-    {"source": 4, "target": 5}
-]
 
 
 //pravimo simulaciju i stavljamo sile
@@ -58,6 +40,9 @@ var link = g.append("g")
     .attr("stroke-width", 2)
     .style("stroke", linkColour);
 
+
+
+
 //draw circles for the nodes
 var node = g.append("g")
         .attr("class", "nodes") //stavljamo koju klasu ce imati element
@@ -73,15 +58,27 @@ var node = g.append("g")
         .on("mouseout", handleMouseOut);
 
 
-var text = g.append("g").attr("class", "labels").selectAll("g")
+var text = g.append("g")
+    .attr("class", "labels")
+    .selectAll("g")
     .data(nodes_data)
-    .enter().append("g")
+    .enter()
+    .append("g")
     .append("text")
     .attr("x", 14)
     .attr("y", ".31em")
     .style("font-family", "sans-serif")
     .style("font-size", "0.7em")
     .text(function (d) { return d.name; });
+
+// node.append("svg:image")
+//     .attr("class", "circle")
+//     .attr("xlink:href", "https://github.com/favicon.ico")
+//     .attr("x", "-8px")
+//     .attr("y", "-8px")
+//     .attr("width", "16px")
+//     .attr("height", "16px");
+
 
 //add drag capabilities
 var drag_handler = d3.drag()
@@ -91,13 +88,11 @@ var drag_handler = d3.drag()
 
 drag_handler(node);
 
-
 //add zoom capabilities
 var zoom_handler = d3.zoom()
     .on("zoom", zoom_actions);
 
 zoom_handler(svg);
-
 
 var label = node.append("text")
       .text(function(d) {
@@ -106,10 +101,10 @@ var label = node.append("text")
       .attr('x', 6)
       .attr('y', 3);
 
+
+
 //dodavanje onog tool tipa -- d je node
 var div = d3.select("div.tooltip");
-console.log("ispis" + div);
-
 
 function handleMouseOver(d, i) {
     d3.select(this).transition()
@@ -133,7 +128,7 @@ function toolBoxIn(d){
         .transition()
         .duration(200)
         .style("opacity", .9);
-        var html = "Atributi "+d.attrs+"<br/>";
+        var html = "Atributi "+d.atributes+"<br/>";
         div.html(html)
             .style("left", (d.x + 15) + "px")
             .style("top", (d.y - 30) + "px");
@@ -150,9 +145,9 @@ function toolBoxOut(d){
 }
 
 function circleColour(d){
-	if(d.el_type =="playlist"){
+	if(d.element_type =="playlist"){
 		return "blue";
-	} else if (d.el_type =="artist"){
+	} else if (d.element_type =="artist"){
 		return "pink";
 	} else{
         return "purple";
