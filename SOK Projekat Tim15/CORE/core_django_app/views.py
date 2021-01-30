@@ -82,3 +82,20 @@ def prikazi_plagine(request):
 #     graf = config.graph
 #     return render(request, "visualization_proba.html", {"title": "Index", "plagin": plagin, "graf": graf})
 
+
+def visualize_data(request):
+    pass
+
+def load_data(request):
+    if request.method == "POST":
+        xml_file = request.FILES['xml_file'].read()
+        xml_file_utf8 = str(xml_file, 'UTF-8')
+        config = apps.get_app_config('core_django_app')
+        plugin = config.load_data_plugins['XMLDataLoader']
+        config.graph = plugin.load_data(xml_file_utf8)
+        print(config.graph.vertex_count())
+        print(xml_file_utf8)
+
+        return redirect('index.html')
+    else:
+        return render(request, 'index.html')

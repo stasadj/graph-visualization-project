@@ -3,50 +3,79 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?{% now 'U' %}"/>
+    <script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base.js' %}"></script>
     <title>{{ title }}</title>
 </head>
+
 <body>
 <div class="page">
-          <div class="left">
-              <ul>
-                  <li>
-                      <a href="{% url 'index' %}">Home</a>
-                  </li>
-                      <form id="odabirPlaginaForma" method='GET' action="{% url 'odabir_plagina' %}">
-                          {% csrf_token %}
+    <span class="left">
+        <table border="0">
+        <form enctype="multipart/form-data" id="source_form" method='POST' action="{% url 'load_data' %}">
+             {% csrf_token %}
+                <tr>
+                    <td id="d1">
+                <select name="source_plugin" class="select" id="source_select">
+                    <option disabled selected value> -- select source plugin -- </option>
+                    {% if plugini_ucitavanje %}
+                    {% for k in plugini_ucitavanje.keys %}
+                    <option value="{{k}}">{{k}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                    </td>
+                <td id="d2">
+                <input type="text" id="playlist_link" name="playlist_link" id="playlist" placeholder="link to deezer playlist" style="display:none">
+                <input type="file" id="xml_file" name="xml_file" accept="text/xml" style="display:none">
+                    </td>
+                    <td id="d3">
+                <input type="submit" value="LOAD DATA" id="load_data"hidden>
+                    </td>
+                </tr>
+        </form>
 
-                          <select name="odabran_ucitavanje">
-                              <option value="Odaberi">Odaberi</option>
-                              {% if plugini_ucitavanje %}
-                                 {% for k in plugini_ucitavanje.keys %}
-                                    <option value="{{k}}">{{k}}</option>
-                                 {% endfor %}
-                              {% endif %}
-                          </select>
+        <form id="visualization_form" method='GET' action="{% url 'visualize_data' %}">
+            <tr>
+                <td>
+                <select name="visualization_plugin" class="select">
+                    <option disabled selected value>-- select visualization plugin --</option>
+                    {% if plugini_vizualizacija %}
+                    {% for k in plugini_vizualizacija.keys %}
+                    <option value="{{k}}">{{k}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                </td>
+                <td></td>
 
-                  </li>
+            </tr>
+                <tr>
+                    <td>
+                <input type="submit" value="VISUALIZE">
+                    </td>
+                </tr>
 
-                  <li>
-                      <select name="odabran_vizualizacija">
-                          <option value="Odaberi">Odaberi</option>
 
-                          {% if plugini_vizualizacija %}
-                             {% for k in plugini_vizualizacija.keys %}
-                                <option value="{{k}}">{{k}}</option>
-                             {% endfor %}
-                          {% endif %}
-                      </select>
-                  </li>
-                  <input type="submit" value="Odaberi">
-                  </form>
-              </ul>
-              {% block links %}{% endblock %}
-          </div>
-          <div class="center">
-              {% block content %}{% endblock %}
-          </div>
-          <div class="footer">SOK projekat - Tim 15 - 2020/2021</div>
+        </form>
+        </table>
+        </span>
+
+
+    <span id="h1">
+        VISUALIZE YOUR DATA
+    </span>
+    <div class="footer">SOK Projekat - Tim 15 </div>
+
+    <div id="tree_bird">
+        <div id="tree_view"> {% block tree_view %} {% endblock %} </div>
+        <div id="bird_view"> {% block bird_view %} {% endblock %} </div>
+    </div>
+
+    <div id="main_view"> {% block main_view %} {% endblock %} </div>
+
+
 </div>
 </body>
 </html>

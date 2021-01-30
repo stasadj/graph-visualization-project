@@ -28,7 +28,7 @@ class LoadXMLData(LoadDataService):
          U zavisnosti od formata zadate XML datoteke vraca graf sa ciklicnom strukturom
         ili klasicnom XML strukturom """
 
-        xml_dom = ET.parse(path)
+        xml_dom = ET.ElementTree(ET.fromstring(path))
         attr_ref = xml_dom.find('.//*[@ref]')
 
         if attr_ref is None:
