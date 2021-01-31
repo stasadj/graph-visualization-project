@@ -81,19 +81,54 @@
         </table>
     </span>
 
-    <span id="h1">
+    <span class="right" id="h1">
         VISUALIZE YOUR DATA
     </span>
 
     <div class="footer">SOK Projekat - Tim 15 </div>
 
+    {% if data_visualized %}
+    <div class="search_filter">
+        <span style="display: inline-block" class="search">
+            <form id="search_form" method='POST' action="{% url 'search_data' %}">
+                {% csrf_token %}
+                <tr>
+                    <td>
+                        <input type="text" id="search_input" name="search_input" placeholder="search here">
+                    </td>
+                    <td>
+                        <input type="submit" value="Search" id="search_bttn">
+                    </td>
+                </tr>
+            </form>
+        </span>
+
+        <span style="display: inline-block" class="filter">
+            <form id="filter_form" method='POST' action="{% url 'filter_data' %}">
+                {% csrf_token %}
+                <tr>
+                    <td>
+                        <input type="text" id="filter_input" name="filter_input" placeholder="filter here">
+                    </td>
+                    <td>
+                        <input type="submit" value="Filter" id="filter_bttn" disabled>
+                    </td>
+                </tr>
+            </form>
+    </span>
+    </div>
+    {% endif %}
+
+
     <div id="tree_bird">
-        <div id="tree_view"> {% block tree_view %} {% endblock %} </div>
-        <div id="bird_view"> {% block bird_view %} {% endblock %} </div>
+    <div id="tree_view"> {% block tree_view %} {% endblock %} </div>
+    <div id="bird_view"> {% block bird_view %} {% endblock %} </div>
     </div>
 
     <div id="main_view"> {% block main_view %} {% endblock %} </div>
 
+
 </div>
+
 </body>
 </html>

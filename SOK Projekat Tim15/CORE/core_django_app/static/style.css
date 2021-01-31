@@ -8,6 +8,12 @@ body {
    width: 33%;
 }
 
+.search_filter{
+    width:100%;
+    text-align:right;
+
+}
+
 .header, .footer{
   background-color: rgba(0, 0, 0, 0.2);
   clear: left;
@@ -25,8 +31,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-radius: 0
-  padding: 0;
-  margin: 0;
+
 }
 
 #d1 {
@@ -120,6 +125,8 @@ table {
   height: 800px;
   width: 20%;
 }
+
+
 
 svg {
   display: inline-block;
