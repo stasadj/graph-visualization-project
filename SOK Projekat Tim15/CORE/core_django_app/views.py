@@ -131,6 +131,7 @@ def create_search_graph(parameter):
 
     for v in old_graph.vertices():
         if parameter.lower() in v.name().lower() or parameter.lower() in v.element_type().lower():
+            print("Inserted new vertex : " + str(v))
             new_graph.insert_vertex_object(v)
         else:
             for val in v.attributes().values():
@@ -144,7 +145,7 @@ def create_search_graph(parameter):
     for v in new_graph.vertices():
         for v2 in new_graph.vertices():
             if v is not v2:
-                if old_graph.get_edge(v, v2) is not None:
+                if old_graph.get_edge(v, v2) is not None and new_graph.get_edge(v, v2) is None:
                     print("Adding for " + str(v) + " and " + str(v2))
                     new_graph.insert_edge(v, v2) #todo ili da dodas postojeci objekat?
 
