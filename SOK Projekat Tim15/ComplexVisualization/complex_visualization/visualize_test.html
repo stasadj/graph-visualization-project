@@ -33,6 +33,26 @@ div.tooltip {
 <div class="tooltip"></div>
 <script>
 
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
+
+function getHeight() {
+  return Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.documentElement.clientHeight
+  );
+}
+
 //kreiramo svg na kome se sve renderuje
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
@@ -43,12 +63,12 @@ var radius = 15;
 //el_type, attrs, idv, name
 
 var nodes_data =  [
-    {"id":1, "el_type": "playlist", "attrs": "", "name": "electronic", "link": ""},
-    {"id":2, "el_type": "track", "attrs": "4min", "name": "Underwater", "link": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fworkingnotworking.com%2Fprojects%2F198290-rufus-du-sol-album-cover-single-art&psig=AOvVaw1h85oj2oHFJhHl1HC9MXzh&ust=1611593757221000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCzpt-Ete4CFQAAAAAdAAAAABAD"},
-    {"id":3, "el_type": "track", "attrs": "2min", "name": "Sundream", "link": ""},
-    {"id":4, "el_type": "track", "attrs": "3min", "name": "Castles in the sky", "link": ""},
-    {"id":5, "el_type": "artist", "attrs": "", "name": "i_o", "link": ""},
-    {"id":6, "el_type": "artist", "attrs": "", "name": "Rüfüs du sol", "link": ""}
+    {"id":1, "element_type": "playlist", "atributes": {"title": "Wolf", "duration": "0:03:43", "album": "Porcelain", "picture": "https://api.deezer.com/album/13649372/image"} , "name": "electronic"},
+    {"id":2, "element_type": "track", "atributes": {}, "name": "Underwater", "link": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fworkingnotworking.com%2Fprojects%2F198290-rufus-du-sol-album-cover-single-art&psig=AOvVaw1h85oj2oHFJhHl1HC9MXzh&ust=1611593757221000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCzpt-Ete4CFQAAAAAdAAAAABAD"},
+    {"id":3, "element_type": "track", "atributes": {}, "name": "Sundream", "link": ""},
+    {"id":4, "element_type": "track", "atributes": {}, "name": "Castles in the sky", "link": ""},
+    {"id":5, "element_type": "artist", "atributes": {}, "name": "i_o", "link": ""},
+    {"id":6, "element_type": "artist", "atributes": {}, "name": "Rüfüs du sol", "link": ""}
     ]
 
 var links_data = [
@@ -68,7 +88,7 @@ var link_force =  d3.forceLink(links_data).id(function(d) { return d.id; });
 
 var charge_force = d3.forceManyBody().strength(-400);
 
-var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar objekta
+var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar containera
 
 simulation.force("charge_force", charge_force)
           .force("center_force", center_force)
@@ -91,17 +111,50 @@ var link = g.append("g")
     .style("stroke", linkColour);
 
 
+{#function makeColorTypeList(){#}
+{#    const colorList = [];#}
+{#    nodes_data.forEach(function(node){#}
+{#        const type = node.element_type;#}
+{#        const isInArray = colorList.some(e => e.hasOwnProperty(`type`));#}
+{#        if(!isInArray){#}
+{#            const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);#}
+{#            const el = { type: `"${color}"`};#}
+{#            colorList.push(el);#}
+{#        }#}
+{#    });#}
+{#    console.log(colorList);#}
+{#}#}
 
+function circleColour(d){
+    //
+    makeColorTypeList();
+    const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+    return color;
+}
 
 //draw circles for the nodes
+// var node = g.append("g")
+// //         .attr("class", "nodes") //stavljamo koju klasu ce imati element
+// //         .selectAll("circle.node")
+// //         .data(nodes_data)
+// //         .enter()
+// //         .append("circle")
+// //         .attr("class", "node")
+// //         .attr("r", radius)
+// //         .attr("fill", circleColour)
+// //         .on("click", handleMouseClick)
+// //         .on("mouseover", handleMouseOver)
+// //         .on("mouseout", handleMouseOut);
+
 var node = g.append("g")
         .attr("class", "nodes") //stavljamo koju klasu ce imati element
-        .selectAll("circle.node")
+        .selectAll("rect.node")
         .data(nodes_data)
         .enter()
-        .append("circle")
+        .append("rect")
         .attr("class", "node")
-        .attr("r", radius)
+        .attr("width", 35)
+        .attr("height", 20)
         .attr("fill", circleColour)
         .on("click", handleMouseClick)
         .on("mouseover", handleMouseOver)
@@ -121,14 +174,6 @@ var text = g.append("g")
     .style("font-size", "0.7em")
     .text(function (d) { return d.name; });
 
-node.append("svg:image")
-    .attr("class", "circle")
-    .attr("xlink:href", "https://github.com/favicon.ico")
-    .attr("x", "-8px")
-    .attr("y", "-8px")
-    .attr("width", "16px")
-    .attr("height", "16px");
-
 
 //add drag capabilities
 var drag_handler = d3.drag()
@@ -137,7 +182,6 @@ var drag_handler = d3.drag()
 	.on("end", drag_end);
 
 drag_handler(node);
-
 
 //add zoom capabilities
 var zoom_handler = d3.zoom()
@@ -149,7 +193,7 @@ var label = node.append("text")
       .text(function(d) {
         return d.name;
       })
-      .attr('x', 6)
+      .attr('x', 35/2)
       .attr('y', 3);
 
 
@@ -173,16 +217,27 @@ function handleMouseOut(d, i) {
 
 function handleMouseClick(d,i){}
 
+
+//"title": "UKF 2018 DRAMnBASS", "creator": "Spotty", "duration": "1:44:11", "picture": "https://api.deezer.com/playlist/4268172382/image"
 function toolBoxIn(d){
     if(d.attrs !== ""){
         div.style("visibility", "visible")
         .transition()
         .duration(200)
         .style("opacity", .9);
-        var html = "Atributi "+d.attrs+"<br/>";
+        var html = "something";
+        {#if(d.element_type === "track")#}
+        {#    var html = `Duration: ${d.atributes.duration}`;#}
+        {#else if(d.element_type === "artist")#}
+        {#    var html = `Name: ${d.atributes.name} <br/>`;#}
+        {#else{#}
+        {#     var html = `Duration: ${d.atributes.duration}`;#}
+        {#}#}
+
+        //uzimamo poziciju misa za koordinate tooltipa
         div.html(html)
-            .style("left", (d.x + 15) + "px")
-            .style("top", (d.y - 30) + "px");
+        .style("top", (d3.event.pageY + 16) + "px")
+        .style("left", (d3.event.pageX + 16) + "px");
     }
 }
 
@@ -195,15 +250,7 @@ function toolBoxOut(d){
         });
 }
 
-function circleColour(d){
-	if(d.el_type =="playlist"){
-		return "blue";
-	} else if (d.el_type =="artist"){
-		return "pink";
-	} else{
-        return "purple";
-    }
-}
+
 
 function linkColour(d){
 	return "blue";
@@ -234,8 +281,8 @@ function zoom_actions(){
 function tickActions() {
     //updejt iscrtanih komponenti na svaki takt
     node
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+        .attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; });
 
     link
         .attr("x1", function(d) { return d.source.x; })
@@ -245,5 +292,5 @@ function tickActions() {
 
     text
         .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
-}
+
 </script>
