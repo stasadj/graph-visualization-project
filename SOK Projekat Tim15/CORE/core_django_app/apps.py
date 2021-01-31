@@ -9,7 +9,7 @@ class CoreDjangoAppConfig(AppConfig):
     load_data_plugins = {}
     visualize_data_plugins = {}
     chosen_load_plugin = None
-    chose_visualize_plugin = None
+    chosen_visualize_plugin = None
 
     def ready(self):
         self.load_data_plugins = self.load_plugins("load.data")

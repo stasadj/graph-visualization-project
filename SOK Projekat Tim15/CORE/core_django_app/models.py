@@ -153,6 +153,13 @@ class Graph:
             self._incoming[v] = {}  # mapa različitih vrednosti za dolazne čvorove
         return v
 
+    def insert_vertex_object(self, v):
+        """ Ubacuje i vraća novi čvor (Vertex) sa elementom x"""
+        self._outgoing[v] = {}
+        if self.is_directed():
+            self._incoming[v] = {}  # mapa različitih vrednosti za dolazne čvorove
+        return v
+
     def insert_edge(self, u, v, x=None):
         """ Ubacuje i vraća novu ivicu (Edge) od u do v sa pomoćnim elementom x.
 
