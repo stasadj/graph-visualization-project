@@ -6,66 +6,77 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?{% now 'U' %}"/>
     <script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'base.js' %}"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <title>{{ title }}</title>
 </head>
 
 <body>
 <div class="page">
+
     <span class="left">
+
         <table border="0">
-        <form enctype="multipart/form-data" id="source_form" method='POST' action="{% url 'load_data' %}">
-             {% csrf_token %}
+
+            <form enctype="multipart/form-data" id="source_form" method='POST' action="{% url 'load_data' %}">
+                 {% csrf_token %}
+
                 <tr>
+
                     <td id="d1">
-                <select name="source_plugin" class="select" id="source_select">
-                    <option disabled selected value> -- select source plugin -- </option>
-                    {% if plugini_ucitavanje %}
-                    {% for k in plugini_ucitavanje.keys %}
-                    <option value="{{k}}">{{k}}</option>
-                    {% endfor %}
-                    {% endif %}
-                </select>
+                        <select name="source_plugin" class="select" id="source_select">
+                            <option disabled selected value> -- select source plugin -- </option>
+                            {% if load_plugins %}
+                            {% for k in load_plugins.keys %}
+                            <option value="{{k}}">{{k}}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
                     </td>
-                <td id="d2">
-                <input type="text" id="playlist_link" name="playlist_link" id="playlist" placeholder="link to deezer playlist" style="display:none">
-                <input type="file" id="xml_file" name="xml_file" accept="text/xml" style="display:none">
+
+                    <td id="d2">
+                        {% if data_loaded %}
+                        <span id="message"> Data successfully loaded! </span>
+                        {% endif %}
+                        <input type="text" id="playlist_link" name="playlist_link" placeholder="link to deezer playlist" style="display:none">
+                        <input type="file" id="xml_file" name="xml_file" accept="text/xml" style="display:none">
                     </td>
-                    <td id="d3">
-                <input type="submit" value="LOAD DATA" id="load_data"hidden>
-                    </td>
+
+                    <td id="d3"> <input type="submit" value="LOAD DATA" id="load_data" hidden> </td>
+
                 </tr>
-        </form>
+            </form>
 
-        <form id="visualization_form" method='GET' action="{% url 'visualize_data' %}">
-            <tr>
-                <td>
-                <select name="visualization_plugin" class="select">
-                    <option disabled selected value>-- select visualization plugin --</option>
-                    {% if plugini_vizualizacija %}
-                    {% for k in plugini_vizualizacija.keys %}
-                    <option value="{{k}}">{{k}}</option>
-                    {% endfor %}
-                    {% endif %}
-                </select>
-                </td>
-                <td></td>
+            <form id="visualization_form" method='POST' action="{% url 'visualize_data' %}">
+                {% csrf_token %}
 
-            </tr>
                 <tr>
+
                     <td>
-                <input type="submit" value="VISUALIZE">
+                        <select name="visualization_plugin" class="select" id="visualization_select">
+                            <option disabled selected value>-- select visualization plugin --</option>
+                            {% if visualize_plugins %}
+                            {% for k in visualize_plugins.keys %}
+                            <option value="{{k}}">{{k}}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
                     </td>
+
                 </tr>
 
+                <tr>
+                    <td><input type="submit" value="VISUALIZE"></td>
 
-        </form>
+                </tr>
+
+            </form>
         </table>
-        </span>
-
+    </span>
 
     <span id="h1">
         VISUALIZE YOUR DATA
     </span>
+
     <div class="footer">SOK Projekat - Tim 15 </div>
 
     <div id="tree_bird">
@@ -74,7 +85,6 @@
     </div>
 
     <div id="main_view"> {% block main_view %} {% endblock %} </div>
-
 
 </div>
 </body>

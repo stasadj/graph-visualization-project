@@ -87,17 +87,19 @@ table {
   display: block;
   height: 70%;
   width: 95%;
-  border: 2px solid black;
+  border: 2px solid #60666d;
   padding: 10px;
+  margin-top: 5px;
 }
 
 #main_view {
   position: relative;
   display: inline-block;
-  height: 800px;
+  height: 805px;
   width: 75%;
-  border: 2px solid black;
+  border: 2px solid #60666d;
   padding: 10px;
+  margin-top: 5px;
 }
 
 #bird_view {
@@ -106,8 +108,9 @@ table {
   display: block;
   height: 27%;
   width: 95%;
-  border: 2px solid black;
+  border: 2px solid #60666d;
   padding: 10px;
+  margin-top: 5px;
 }
 
 #tree_bird{
@@ -117,3 +120,10 @@ table {
   height: 800px;
   width: 20%;
 }
+
+svg {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+

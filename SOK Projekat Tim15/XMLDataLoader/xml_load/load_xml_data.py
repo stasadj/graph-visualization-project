@@ -23,7 +23,7 @@ class LoadXMLData(LoadDataService):
         return 'XMLDataLoader'
 
     def load_data(self, path) -> Graph:
-        """ Ucitava XML dokument sa zadate putanje
+        """ Parsira prosledjeni XML string
 
          U zavisnosti od formata zadate XML datoteke vraca graf sa ciklicnom strukturom
         ili klasicnom XML strukturom """
