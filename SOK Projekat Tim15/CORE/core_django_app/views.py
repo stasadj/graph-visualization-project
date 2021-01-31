@@ -23,6 +23,12 @@ def visualize_data(request):
         load_plugins = config.load_data_plugins
         visualize_plugins = config.visualize_data_plugins
 
+        if config.graph is None:
+            return render(request, "index.html", {"title": config.verbose_name,
+                                                      "data_not_loaded": True,
+                                                      "load_plugins": load_plugins,
+                                                      "visualize_plugins": visualize_plugins})
+
         if request.POST.get('visualization_plugin') == 'SimpleVisualization':
             plugin = config.visualize_data_plugins['SimpleVisualization']
             return render(request, "main_view.html", {"title": "Main View",
@@ -50,7 +56,11 @@ def load_data(request):
             try:
                 xml_file = request.FILES['xml_file'].read()
             except KeyError:
-                return redirect('index')
+                return render(request, "index.html", {"title": config.verbose_name,
+                                                      "data_not_loaded": True,
+                                                      "load_plugins": load_plugins,
+                                                      "visualize_plugins": visualize_plugins})
+
             xml_file_utf8 = str(xml_file, 'UTF-8')
             plugin = config.load_data_plugins['XMLDataLoader']
             config.graph = plugin.load_data(xml_file_utf8)
@@ -62,6 +72,13 @@ def load_data(request):
 
         if request.POST.get('source_plugin') == 'DeezerDataLoader':
             playlist_path = request.POST.get('playlist_link')
+
+            if playlist_path is None or playlist_path == '':
+                return render(request, "index.html", {"title": config.verbose_name,
+                                                      "data_not_loaded": True,
+                                                      "load_plugins": load_plugins,
+                                                      "visualize_plugins": visualize_plugins})
+
             plugin = config.load_data_plugins['DeezerDataLoader']
             config.graph = plugin.load_data(playlist_path)
             return render(request, "index.html", {"title": "Data Loaded",

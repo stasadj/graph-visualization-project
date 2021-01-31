@@ -5,7 +5,7 @@ $(document).ready(function() {
         $('#playlist_link').css('display','none');
         $('#xml_file').hide();
         $('#load_data').hide();
-        $('#message').hide();
+        $('#message1').hide();
 
         if (selected === 'XMLDataLoader') {
             $('#xml_file').show();
@@ -16,6 +16,21 @@ $(document).ready(function() {
             $('#playlist_link').css('display','block');
             $('#playlist_link').width('98%');
             $('#load_data').show();
+        }
+
+    });
+
+    $('#visualization_select').change(function() {
+        var selected = $(this).val();
+
+        $('#visualize_bttn').attr('disabled');
+
+        if (selected === 'SimpleVisualization') {
+            $('#visualize_bttn').removeAttr('disabled');
+        }
+
+        if (selected === 'ComplexVisualization') {
+            $('#visualize_bttn').removeAttr('disabled');
         }
 
     });

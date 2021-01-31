@@ -35,7 +35,7 @@
 
                     <td id="d2">
                         {% if data_loaded %}
-                        <span id="message"> Data successfully loaded! </span>
+                        <span id="message1"> Data successfully loaded! </span>
                         {% endif %}
                         <input type="text" id="playlist_link" name="playlist_link" placeholder="link to deezer playlist" style="display:none">
                         <input type="file" id="xml_file" name="xml_file" accept="text/xml" style="display:none">
@@ -62,10 +62,16 @@
                         </select>
                     </td>
 
+                    <td>
+                        {% if data_not_loaded %}
+                        <span id="message2"> Data is not loaded! </span>
+                        {% endif %}
+                    </td>
+
                 </tr>
 
                 <tr>
-                    <td><input type="submit" value="VISUALIZE"></td>
+                    <td><input type="submit" value="VISUALIZE" id="visualize_bttn" disabled></td>
 
                 </tr>
 
