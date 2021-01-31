@@ -6,6 +6,7 @@ $(document).ready(function() {
         $('#xml_file').hide();
         $('#load_data').hide();
         $('#message1').hide();
+         $('#visualization_form').hide();
 
         if (selected === 'XMLDataLoader') {
             $('#xml_file').show();

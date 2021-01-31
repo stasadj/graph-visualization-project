@@ -46,6 +46,7 @@
                 </tr>
             </form>
 
+            {% if data_loaded %}
             <form id="visualization_form" method='POST' action="{% url 'visualize_data' %}">
                 {% csrf_token %}
 
@@ -76,6 +77,7 @@
                 </tr>
 
             </form>
+            {% endif %}
         </table>
     </span>
 
