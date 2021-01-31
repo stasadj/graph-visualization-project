@@ -9,18 +9,15 @@ class CoreDjangoAppConfig(AppConfig):
     load_data_plugins = {}
     visualize_data_plugins = {}
     chosen_load_plugin = None
-    chose_visualize_plugin = None
+    chosen_visualize_plugin = None
 
     def ready(self):
         self.load_data_plugins = self.load_plugins("load.data")
         self.visualize_data_plugins = self.load_plugins("visualize.data")
-        #  test
-        #self.graph = self.load_data_plugins['DeezerDataLoader'].load_data("https://api.deezer.com/playlist/6033056424")
-        #print(self.visualize_data_plugins['SimpleVisualization'].visualize())
 
-    def load_plugins(self, oznaka):
+    def load_plugins(self, entry_point):
         plugins = {}
-        for ep in pkg_resources.iter_entry_points(group=oznaka):
+        for ep in pkg_resources.iter_entry_points(group=entry_point):
             p = ep.load()
             #print("{} {}".format(ep.name, p))
             plugin = p()

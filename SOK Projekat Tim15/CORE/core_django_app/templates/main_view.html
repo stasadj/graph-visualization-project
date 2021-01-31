@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block main_view %}
+<svg preserveAspectRatio="xMinYMin meet"></svg>
+<script>
+
+var nodes_data =  [
+    {% for v in graph.vertices %}
+    {"id" : {{v.id}}, "name" : "{{v.name | safe}}", "element_type" : "{{v.element_type | safe}}", "atributes" : {{v.get_json_attributes | safe}} },
+    {% endfor %}
+    ]
+
+var links_data = [
+    {% for e in graph.edges %}
+    {"source": {{e.endpoints.0.id}}, "target": {{e.endpoints.1.id}} },
+    {% endfor %}
+]
+
+{{plugin.visualize | safe}}
+
+</script>
+{% endblock %}

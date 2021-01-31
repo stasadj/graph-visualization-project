@@ -1,35 +1,47 @@
-
+body {
+   background-image: url('bg.jpg');
+   font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+}
 
 .left {
-  margin: 0px;
-  float: left;
-  width: 30%;
+   float: left;
+   width: 33%;
+}
+
+.search_filter{
+    width:100%;
+    text-align:right;
 
 }
+
 .header, .footer{
-  background-color: lightblue;
+  background-color: rgba(0, 0, 0, 0.2);
   clear: left;
   width:100%;
   border: solid black 1px;
 }
 
-.center{
- margin-left: 30%;
- width: 70%;
- border-left: solid black 1px;
-}
-
-
 .page{
   text-align: center;
-  margin: auto;
-  min-width: 50%;
-  width: 80%;
 }
 
-table{
-  margin: 0 auto;
+
+table {
+  height: 100%
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 0
+
 }
+
+#d1 {
+    width: 39%;
+}
+
+#d2 {
+    width: 60%;
+}
+
 
 .label{
  clear: left;
@@ -38,3 +50,87 @@ table{
 .greska{
   color: red;
 }
+
+.select {
+  position: relative;
+  display: inline;
+  width: 100%;
+  font-size: 15px;
+  color: #60666d;
+}
+
+#xml_file {
+  position: relative;
+  display: inline;
+  width: 100%;
+  font-size: 12px;
+  border: 1px solid #60666d;
+}
+
+#playlist {
+  position: relative;
+  width: 95%;
+  font-size: 13px;
+  color: #60666d;
+}
+
+#h1 {
+  color: #eb9334;
+  font-size: 60px;
+  font-weight: 350;
+  line-height: 60px;
+  margin: 10px 0 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #000,
+  margin: 10px 0 24px;
+  text-align: center;
+}
+
+#tree_view {
+  float: left;
+  position: relative;
+  display: block;
+  height: 70%;
+  width: 95%;
+  border: 2px solid #60666d;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+#main_view {
+  position: relative;
+  display: inline-block;
+  height: 805px;
+  width: 75%;
+  border: 2px solid #60666d;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+#bird_view {
+  float: left;
+  position: relative;
+  display: block;
+  height: 27%;
+  width: 95%;
+  border: 2px solid #60666d;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+#tree_bird{
+  float: left;
+  position: relative;
+  display: inline-block;
+  height: 800px;
+  width: 20%;
+}
+
+
+
+svg {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+

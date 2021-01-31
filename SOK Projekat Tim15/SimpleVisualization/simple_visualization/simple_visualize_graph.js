@@ -30,7 +30,8 @@ simulation
 simulation.on("tick", tickActions );
 
 var g = svg.append("g")
-    .attr("class", "everything");
+    .attr("class", "everything")
+    .attr('transform', "translate(730, 400)");
 
 var link = g.append("g")
       .attr("class", "links")

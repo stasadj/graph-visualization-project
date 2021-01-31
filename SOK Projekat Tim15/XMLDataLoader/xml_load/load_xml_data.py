@@ -23,12 +23,12 @@ class LoadXMLData(LoadDataService):
         return 'XMLDataLoader'
 
     def load_data(self, path) -> Graph:
-        """ Ucitava XML dokument sa zadate putanje
+        """ Parsira prosledjeni XML string
 
          U zavisnosti od formata zadate XML datoteke vraca graf sa ciklicnom strukturom
         ili klasicnom XML strukturom """
 
-        xml_dom = ET.parse(path)
+        xml_dom = ET.ElementTree(ET.fromstring(path))
         attr_ref = xml_dom.find('.//*[@ref]')
 
         if attr_ref is None:
