@@ -57,7 +57,6 @@ class LoadDeezerData(LoadDataService):
 
         # Checking if playlist is private
         if "error" in playlist:
-            print("private playlist!")
             return None
 
         playlist_attributes = {}
@@ -105,12 +104,6 @@ class LoadDeezerData(LoadDataService):
             # Now we save the artist vertex in case another track in the playlist has the same artist
             self.artists[track["artist"]["id"]] = artist_vertex
 
-
-        # print("Number of vertices: " + str(self.graph.vertex_count()))
-        # for v in self.graph.vertices():
-        #     print(v)
-        # for e in self.graph.edges():
-        #     print(e)
         return self.graph
 
 
