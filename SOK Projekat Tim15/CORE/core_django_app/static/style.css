@@ -86,7 +86,7 @@ table {
   text-align: center;
 }
 
-#tree_view {
+#scroll_container {
   float: left;
   position: relative;
   display: block;
@@ -95,6 +95,8 @@ table {
   border: 2px solid #60666d;
   padding: 10px;
   margin-top: 5px;
+  overflow-y: scroll;
+  user-select: none;
 }
 
 #main_view {

@@ -1,0 +1,105 @@
+{% extends "main_view.html" %}
+{% block tree_view %}
+<script>
+    var data = [
+    {% for v in graph.vertices %}
+    {
+        name: "{{v.element_type | safe}}: {{v.name | safe}}", id: {{v.id}},
+        children: [],
+        links: [
+        {% for e in graph.edges %}
+        {% if e.endpoints.0.id == v.id %}
+            {{ e.endpoints.1.id }},
+        {% endif %}
+        {% endfor %} ],
+        selected: false
+    },
+    {% endfor %}
+    ];
+
+    var id_node = {};
+    for (node of data) {
+        id_node[node.id] = node;
+    }
+
+
+    for (node of data) {
+        for (id of node.links) {
+            if (id_node[id]) {
+                node.children.push({name: id_node[id].name, id: id, links: id_node[id].links, selected: false});
+            }
+        }
+    }
+
+    var selected_node_id = 0;
+
+    $('#tree_view').tree({
+    data: data,
+    selectable: false
+    });
+
+    $('#tree_view').on(
+    'tree.open',
+    function(event) {
+
+        for (child of event.node.children) {
+            child["children"] = [];
+            for (id of child.links) {
+                if (id_node[id]) {
+                    $('#tree_view').tree(
+                    'appendNode',
+                    {name: id_node[id].name, id: id, links: id_node[id].links, selected: id_node[id].selected},
+                    child
+                    );
+                }
+            }
+        }
+
+        $('.jqtree-element').each(function() {
+        var node = $('#tree_view').tree('getNodeByHtmlElement', $(this));
+        console.log(selected_node_id);
+        if (node.id === selected_node_id) {
+            $(this).css('background-color', '#eb9334');
+            node.selected = true;
+        }
+        });
+    });
+
+    $('#tree_view').on(
+    'tree.close',
+    function(event) {
+        for (child of event.node.children) {
+            $('#tree_view').tree('closeNode', child);
+            for (node of child.children) {
+                $('#tree_view').tree('removeNode', node);
+            }
+        }
+    });
+
+    $('#tree_view').on(
+    'tree.click',
+    function(event) {
+        if (event.node.selected){
+            event.node.selected = false;
+            selected_node_id = 0;
+        } else {
+            event.node.selected = true;
+            selected_node_id = event.node.id;
+        }
+
+        $('.jqtree-element').each(function() {
+        var node = $('#tree_view').tree('getNodeByHtmlElement', $(this));
+        if (node.id === event.node.id && event.node.selected) {
+            $(this).css('background-color', '#eb9334');
+            node.selected = true;
+        } else {
+            $(this).css('background-color', 'transparent');
+            node.selected = false;
+        }
+        });
+
+    });
+
+
+</script>
+{% endblock %}

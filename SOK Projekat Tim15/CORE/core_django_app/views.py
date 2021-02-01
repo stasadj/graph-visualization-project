@@ -37,7 +37,7 @@ def visualize_data(request):
         if request.POST.get('visualization_plugin') == 'SimpleVisualization':
             plugin = config.visualize_data_plugins['SimpleVisualization']
             config.chosen_visualize_plugin = plugin
-            return render(request, "main_view.html", {"title": "Main View",
+            return render(request, "index.html", {"title": "Main View",
                                                     "plugin": plugin,
                                                     "data_visualized": True,
                                                     "graph": config.graph,
@@ -47,7 +47,7 @@ def visualize_data(request):
         if request.POST.get('visualization_plugin') == 'ComplexVisualization':
             plugin = config.visualize_data_plugins['ComplexVisualization']
             config.chosen_visualize_plugin = plugin
-            return render(request, "main_view.html", {"title": "Main View",
+            return render(request, "index.html", {"title": "Main View",
                                                       "plugin": plugin,
                                                       "data_visualized": True,
                                                       "graph": config.graph,
@@ -116,7 +116,7 @@ def search_data(request):
 
     new_graph = create_search_graph(parameter)
 
-    return render(request, "main_view.html", {"title": "Main View",
+    return render(request, "index.html", {"title": "Main View",
                                               "plugin": config.chosen_visualize_plugin,
                                               "graph": new_graph,
                                               "data_visualized": True,
