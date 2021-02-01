@@ -12,7 +12,8 @@
             {{ e.endpoints.1.id }},
         {% endif %}
         {% endfor %} ],
-        selected: false
+        selected: false,
+        attributes: {{v.get_json_attributes | safe}}
     },
     {% endfor %}
     ];
@@ -26,7 +27,7 @@
     for (node of data) {
         for (id of node.links) {
             if (id_node[id]) {
-                node.children.push({name: id_node[id].name, id: id, links: id_node[id].links, selected: false});
+                node.children.push({name: id_node[id].name, id: id, links: id_node[id].links, selected: false, attributes: id_node[id].attributes});
             }
         }
     }
@@ -48,7 +49,7 @@
                 if (id_node[id]) {
                     $('#tree_view').tree(
                     'appendNode',
-                    {name: id_node[id].name, id: id, links: id_node[id].links, selected: id_node[id].selected},
+                    {name: id_node[id].name, id: id, links: id_node[id].links, selected: id_node[id].selected, attributes: id_node[id].attributes},
                     child
                     );
                 }
@@ -99,6 +100,18 @@
         });
 
     });
+
+    $('#tree_view').on(
+    'tree.dblclick',
+    function(event) {
+        var out = '';
+        out += event.node.name + "\n";
+        for (const key in event.node.attributes) {
+            out += key + ": " +  event.node.attributes[key] + "\n";
+        }
+        alert(out);
+    }
+);
 
 
 </script>
