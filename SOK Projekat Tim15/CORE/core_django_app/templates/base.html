@@ -89,6 +89,9 @@
 
     {% if data_visualized %}
     <div class="search_filter">
+        <span style="display: inline-block" >
+            {{ error_message }}
+        </span>
         <span style="display: inline-block" class="search">
             <form id="search_form" method='POST' action="{% url 'search_data' %}">
                 {% csrf_token %}
@@ -111,7 +114,7 @@
                         <input type="text" id="filter_input" name="filter_input" placeholder="filter here">
                     </td>
                     <td>
-                        <input type="submit" value="Filter" id="filter_bttn" disabled>
+                        <input type="submit" value="Filter" id="filter_bttn">
                     </td>
                 </tr>
             </form>
