@@ -25,7 +25,7 @@ var svg = d3.select("svg"),
 
 var radius = 20;
 
-var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
+var tcColours = ['#e5cf8c', '#ffa3a0', '#ffa3dd', '#9dffc1', '#9bff5f', '#ad9dff'];
 
 var randomTcColour = function() {
   return Math.floor(Math.random() * tcColours.length);
@@ -54,20 +54,25 @@ var g = svg.append("g")
     .attr("class", "everything");
 
 var link = g.append("g")
-      .attr("class", "links")
+    .attr("class", "links")
     .selectAll("line")
     .data(links_data)
     .enter().append("line")
-      .attr("stroke-width", 2)
-      .style("stroke", tcColours[randomTcColour()]);
+    .attr("stroke-width", 2)
+    .style("stroke", tcColours[randomTcColour()]);
 
 var tooltip = d3.select("body")
     .append("div")
     .style("position", "absolute")
     .style("z-index", "10")
+    .style("white-space", "pre")
     .style("display", "flex")
+    .style("border-radius","15px")
     .style("justify-content", "flex-start")
     .style("visibility", "hidden")
+    .style("font-family", "Arial")
+    .style("font-size", 15)
+    .style("font-weight", "bold")
     .style("background", tcColours[randomTcColour()])
     .text("");
 
@@ -79,7 +84,8 @@ var node = g.append("g")
         .append("circle")
         .attr("r", radius)
         .attr("fill", tcColours[randomTcColour()])
-        .on("mouseover", function(d){tooltip.text(d); return tooltip.style("visibility", "visible").text(json_petty(d.atributes));})
+        .on("mousedown", function(){return tooltip.style("visibility", "hidden").text("");})
+        .on("mouseover", function(d){return tooltip.style("visibility", "visible").text(json_petty(d.atributes));})
         .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
         .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
@@ -112,10 +118,11 @@ zoom_handler(svg);
 
 function json_petty(atr)
 {
-    var str_json = "";
+    var str_json = "\n";
     for (const key in atr) {
-            str_json += key + ": " + atr[key] + "\n";
+            str_json += "\t" + key.charAt(0).toUpperCase() + key.slice(1) + ": " + atr[key] + "\t\n";
         }
+     str_json += "\n"
     return str_json;
 }
 
@@ -146,7 +153,7 @@ function zoom_actions(){
 
 function tickActions() {
 
-       node
+    node
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
@@ -156,6 +163,7 @@ function tickActions() {
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    label.attr("x", function(d){ return d.x; })
+    label
+        .attr("x", function(d){ return d.x; })
         .attr("y", function (d) {return d.y ; });
 }
