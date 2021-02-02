@@ -18,13 +18,30 @@
     {% endfor %}
     ];
 
+    var roots = [
+    {% for v in graph.roots %}
+    {
+        name: "{{v.element_type | safe}}: {{v.name | safe}}", id: {{v.id}},
+        children: [],
+        links: [
+        {% for e in graph.edges %}
+        {% if e.endpoints.0.id == v.id %}
+            {{ e.endpoints.1.id }},
+        {% endif %}
+        {% endfor %} ],
+        selected: false,
+        attributes: {{v.get_json_attributes | safe}}
+    },
+    {% endfor %}
+    ];
+
     var id_node = {};
     for (node of data) {
         id_node[node.id] = node;
     }
 
 
-    for (node of data) {
+    for (node of roots) {
         for (id of node.links) {
             if (id_node[id]) {
                 node.children.push({name: id_node[id].name, id: id, links: id_node[id].links, selected: false, attributes: id_node[id].attributes});
@@ -35,7 +52,7 @@
     var selected_node_id = 0;
 
     $('#tree_view').tree({
-    data: data,
+    data: roots,
     selectable: false
     });
 
