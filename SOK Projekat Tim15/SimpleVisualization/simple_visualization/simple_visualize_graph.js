@@ -1,10 +1,31 @@
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+};
+
+function getHeight() {
+  return Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.documentElement.clientHeight
+  );
+};
+
+//kreiramo svg na kome se sve renderuje
 var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+    width = getWidth(),
+    height = getHeight();
 
-var radius = 30;
+var radius = 20;
 
-var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
+var tcColours = ['#e5cf8c', '#ffa3a0', '#ffa3dd', '#9dffc1', '#9bff5f', '#ad9dff'];
 
 var randomTcColour = function() {
   return Math.floor(Math.random() * tcColours.length);
@@ -30,16 +51,30 @@ simulation
 simulation.on("tick", tickActions );
 
 var g = svg.append("g")
-    .attr("class", "everything")
-    .attr('transform', "translate(730, 400)");
+    .attr("class", "everything");
 
 var link = g.append("g")
-      .attr("class", "links")
+    .attr("class", "links")
     .selectAll("line")
     .data(links_data)
     .enter().append("line")
-      .attr("stroke-width", 2)
-      .style("stroke", tcColours[randomTcColour()]);
+    .attr("stroke-width", 2)
+    .style("stroke", tcColours[randomTcColour()]);
+
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("white-space", "pre")
+    .style("display", "flex")
+    .style("border-radius","15px")
+    .style("justify-content", "flex-start")
+    .style("visibility", "hidden")
+    .style("font-family", "Arial")
+    .style("font-size", 15)
+    .style("font-weight", "bold")
+    .style("background", tcColours[randomTcColour()])
+    .text("");
 
 var node = g.append("g")
         .attr("class", "nodes")
@@ -48,7 +83,11 @@ var node = g.append("g")
         .enter()
         .append("circle")
         .attr("r", radius)
-        .attr("fill", tcColours[randomTcColour()]);
+        .attr("fill", tcColours[randomTcColour()])
+        .on("mousedown", function(){return tooltip.style("visibility", "hidden").text("");})
+        .on("mouseover", function(d){return tooltip.style("visibility", "visible").text(json_petty(d.atributes));})
+        .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+        .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
 var label = g.append("g")
     .attr("class", "label")
@@ -77,6 +116,16 @@ var zoom_handler = d3.zoom()
 
 zoom_handler(svg);
 
+function json_petty(atr)
+{
+    var str_json = "\n";
+    for (const key in atr) {
+            str_json += "\t" + key.charAt(0).toUpperCase() + key.slice(1) + ": " + atr[key] + "\t\n";
+        }
+     str_json += "\n"
+    return str_json;
+}
+
 function empty_string(d){
 	return d.element_type + ": " + d.name;
 }
@@ -104,7 +153,7 @@ function zoom_actions(){
 
 function tickActions() {
 
-       node
+    node
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
@@ -114,6 +163,7 @@ function tickActions() {
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    label.attr("x", function(d){ return d.x; })
+    label
+        .attr("x", function(d){ return d.x; })
         .attr("y", function (d) {return d.y ; });
 }

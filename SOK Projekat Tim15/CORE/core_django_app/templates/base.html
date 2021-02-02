@@ -5,6 +5,8 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?{% now 'U' %}"/>
     <script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'tree.jquery.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jqtree.css' %}?{% now 'U' %}"/>
     <script type="text/javascript" src="{% static 'base.js' %}"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <title>{{ title }}</title>
@@ -89,6 +91,9 @@
 
     {% if data_visualized %}
     <div class="search_filter">
+        <span style="display: inline-block" >
+            {{ error_message }}
+        </span>
         <span style="display: inline-block" class="search">
             <form id="search_form" method='POST' action="{% url 'search_data' %}">
                 {% csrf_token %}
@@ -111,7 +116,7 @@
                         <input type="text" id="filter_input" name="filter_input" placeholder="filter here">
                     </td>
                     <td>
-                        <input type="submit" value="Filter" id="filter_bttn" disabled>
+                        <input type="submit" value="Filter" id="filter_bttn">
                     </td>
                 </tr>
             </form>
@@ -121,8 +126,8 @@
 
 
     <div id="tree_bird">
-    <div id="tree_view"> {% block tree_view %} {% endblock %} </div>
-    <div id="bird_view"> {% block bird_view %} {% endblock %} </div>
+        <div id="scroll_container"> <div id="tree_view"> {% block tree_view %} {% endblock %} </div> </div>
+        <div id="bird_view"> {% block bird_view %} {% endblock %} </div>
     </div>
 
     <div id="main_view"> {% block main_view %} {% endblock %} </div>

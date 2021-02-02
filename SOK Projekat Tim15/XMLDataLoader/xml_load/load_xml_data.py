@@ -40,9 +40,9 @@ class LoadXMLData(LoadDataService):
         return self.graph
 
     def circular_graph(self, xml_dom):
-        """ Parsira prosledjeni XML DOM u ciklican usmeren graf """
+        """ Parsira prosledjeni XML DOM u ciklican graf """
 
-        self.graph = Graph(True)
+        self.graph = Graph()
         element_vertex = self.create_element_vertex_dict(xml_dom)
 
         for element, vertex in element_vertex.items():
@@ -57,7 +57,7 @@ class LoadXMLData(LoadDataService):
                             self.graph.insert_edge(vertex, element_vertex[elem])
 
     def xml_tree(self, xml_dom):
-        """ Parsira prosledjeni XML DOM u neusmeren graf (stablo) sa klasicnom XML strukturom """
+        """ Parsira prosledjeni XML DOM u stablo sa klasicnom XML strukturom """
 
         self.graph = Graph()
         element_vertex = self.create_element_vertex_dict(xml_dom)

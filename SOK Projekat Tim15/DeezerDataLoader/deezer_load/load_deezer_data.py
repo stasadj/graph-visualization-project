@@ -57,14 +57,16 @@ class LoadDeezerData(LoadDataService):
 
         # Checking if playlist is private
         if "error" in playlist:
-            print("private playlist!")
             return None
 
         playlist_attributes = {}
         playlist_attributes["title"] = playlist["title"]
+        playlist_attributes["description"] = playlist["description"]
         playlist_attributes["creator"] = playlist["creator"]["name"]
         playlist_attributes["duration"] = convert_seconds(playlist["duration"])
-        playlist_attributes["picture"] = playlist["picture"]
+        #playlist_attributes["picture"] = playlist["picture"]
+        playlist_attributes["nb_tracks"] = playlist["nb_tracks"]
+        playlist_attributes["link"] = playlist["link"]
 
         # Adding our root playlist vertex to graph
         playlist_vertex = self.graph.insert_vertex(playlist["type"], playlist_attributes, playlist["title"])
@@ -75,7 +77,9 @@ class LoadDeezerData(LoadDataService):
             track_attributes["title"] = track["title_short"]
             track_attributes["duration"] = convert_seconds(track["duration"])
             track_attributes["album"] = track["album"]["title"]
-            track_attributes["picture"] = track["album"]["cover"]
+            #track_attributes["picture"] = track["album"]["cover"]
+            track_attributes["rank"] = track["rank"]
+            track_attributes["link"] = track["link"]
 
             # For each track we create a new vertex
             track_vertex = self.graph.insert_vertex(track["type"], track_attributes, track["title_short"])
@@ -92,11 +96,12 @@ class LoadDeezerData(LoadDataService):
             # If the artist vertex doesnt already exist, we create a new one
             artist_attributes = {}
             artist_attributes["name"] = track["artist"]["name"]
+            artist_attributes["link"] = track["artist"]["link"]
 
-            #TODO: Rethink getting the artist picture, as we have to send a new request for each track -> time consuming
-            if playlist["nb_tracks"] <= 70:
-                artistJson = requests.get(track["artist"]["link"].replace("www", "api")).json()
-                artist_attributes["picture"] = artistJson["picture_medium"]
+            # #TODO: Rethink getting the artist picture, as we have to send a new request for each track -> time consuming
+            # if playlist["nb_tracks"] <= 70:
+            #     artistJson = requests.get(track["artist"]["link"].replace("www", "api")).json()
+            #     artist_attributes["picture"] = artistJson["picture_medium"]
 
             # We add the artist vertex to graph and connect it to the track vertex
             artist_vertex = self.graph.insert_vertex(track["artist"]["type"], artist_attributes, track["artist"]["name"])
@@ -105,22 +110,5 @@ class LoadDeezerData(LoadDataService):
             # Now we save the artist vertex in case another track in the playlist has the same artist
             self.artists[track["artist"]["id"]] = artist_vertex
 
-
-        # print("Number of vertices: " + str(self.graph.vertex_count()))
-        # for v in self.graph.vertices():
-        #     print(v)
-        # for e in self.graph.edges():
-        #     print(e)
         return self.graph
 
-
-
-
-
-if __name__ == '__main__':
-    some_playlist_path = "https://api.deezer.com/playlist/6033056424"
-    some_playlist_path2 = "https://www.deezer.com/us/playlist/8433466142".replace("www", "api").replace("/us", "")
-
-    deez = LoadDeezerData()
-    #deez.load_data(some_playlist_path)
-    #deez.load_data("https://www.deezer.com/us/playlist/8649081922")
