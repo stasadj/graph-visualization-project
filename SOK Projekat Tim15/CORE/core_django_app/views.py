@@ -37,7 +37,7 @@ def visualize_data(request):
         if request.POST.get('visualization_plugin') == 'SimpleVisualization':
             plugin = config.visualize_data_plugins['SimpleVisualization']
             config.chosen_visualize_plugin = plugin
-            return render(request, "main_view.html", {"title": "Main View",
+            return render(request, "index.html", {"title": "Main View",
                                                     "plugin": plugin,
                                                     "data_visualized": True,
                                                     "graph": config.graph,
@@ -47,7 +47,7 @@ def visualize_data(request):
         if request.POST.get('visualization_plugin') == 'ComplexVisualization':
             plugin = config.visualize_data_plugins['ComplexVisualization']
             config.chosen_visualize_plugin = plugin
-            return render(request, "main_view.html", {"title": "Main View",
+            return render(request, "index.html", {"title": "Main View",
                                                       "plugin": plugin,
                                                       "data_visualized": True,
                                                       "graph": config.graph,
@@ -116,7 +116,7 @@ def search_data(request):
 
     new_graph = create_search_graph(parameter)
 
-    return render(request, "main_view.html", {"title": "Main View",
+    return render(request, "index.html", {"title": "Main View",
                                               "plugin": config.chosen_visualize_plugin,
                                               "graph": new_graph,
                                               "data_visualized": True,
@@ -217,7 +217,7 @@ def filter_data(request):
     query = request.POST["filter_input"]
     if not query_format_correct(query):
         # if the query format isn't correct, we show the original graph again with an error message
-        return render(request, "main_view.html", {"title": "Main View",
+        return render(request, "index.html", {"title": "Main View",
                                                   "plugin": config.chosen_visualize_plugin,
                                                   "graph": config.graph,
                                                   "data_visualized": True,
@@ -226,7 +226,7 @@ def filter_data(request):
                                                   "visualize_plugins": config.visualize_data_plugins})
     
     new_graph = create_filter_graph(get_query_tokens(query))
-    return render(request, "main_view.html", {"title": "Main View",
+    return render(request, "index.html", {"title": "Main View",
                                               "plugin": config.chosen_visualize_plugin,
                                               "graph": new_graph,
                                               "data_visualized": True,
