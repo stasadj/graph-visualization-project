@@ -1,6 +1,4 @@
 build/
 complex_visualization.egg-info/
 dist/
-core_django_app/__pycache__/
-core_django_app/migrations/__pycache__/
-core_django_app/services/__pycache__/
+complex_visualization/__pycache__/
