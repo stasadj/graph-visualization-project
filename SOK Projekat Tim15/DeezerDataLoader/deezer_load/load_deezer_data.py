@@ -65,7 +65,7 @@ class LoadDeezerData(LoadDataService):
         playlist_attributes["creator"] = playlist["creator"]["name"]
         playlist_attributes["duration"] = convert_seconds(playlist["duration"])
         #playlist_attributes["picture"] = playlist["picture"]
-        playlist_attributes["nb_tracks"] = playlist["nb_tracks"]
+        playlist_attributes["nb_tracks"] = str(playlist["nb_tracks"])
         playlist_attributes["link"] = playlist["link"]
 
         # Adding our root playlist vertex to graph
@@ -78,7 +78,7 @@ class LoadDeezerData(LoadDataService):
             track_attributes["duration"] = convert_seconds(track["duration"])
             track_attributes["album"] = track["album"]["title"]
             #track_attributes["picture"] = track["album"]["cover"]
-            track_attributes["rank"] = track["rank"]
+            track_attributes["rank"] = str(track["rank"])
             track_attributes["link"] = track["link"]
 
             # For each track we create a new vertex

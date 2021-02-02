@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: black	;
+  stroke-width: 0px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    width: 80px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: #8fb3de;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+</style>
+<svg width="800" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<div class="tooltip"></div>
+<script>
+
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
+
+function getHeight() {
+  return Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.documentElement.clientHeight
+  );
+}
+
+//kreiramo svg na kome se sve renderuje
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var radius = 15;
+
+//el_type, attrs, idv, name
+
+var nodes_data =  [
+    {"id":1, "element_type": "playlist", "atributes": {"title": "Wolf", "duration": "0:03:43", "album": "Porcelain", "picture": "https://api.deezer.com/album/13649372/image"} , "name": "electronic"},
+    {"id":2, "element_type": "track", "atributes": {}, "name": "Underwater", "link": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fworkingnotworking.com%2Fprojects%2F198290-rufus-du-sol-album-cover-single-art&psig=AOvVaw1h85oj2oHFJhHl1HC9MXzh&ust=1611593757221000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCzpt-Ete4CFQAAAAAdAAAAABAD"},
+    {"id":3, "element_type": "track", "atributes": {}, "name": "Sundream", "link": ""},
+    {"id":4, "element_type": "track", "atributes": {}, "name": "Castles in the sky", "link": ""},
+    {"id":5, "element_type": "artist", "atributes": {}, "name": "i_o", "link": ""},
+    {"id":6, "element_type": "artist", "atributes": {}, "name": "Rüfüs du sol", "link": ""}
+    ]
+
+var links_data = [
+	{"source": 1, "target": 2},
+    {"source": 1, "target": 3},
+    {"source": 1, "target": 4},
+    {"source": 2, "target": 6},
+    {"source": 3, "target": 6},
+    {"source": 4, "target": 5}
+]
+
+
+//pravimo simulaciju i stavljamo sile
+var simulation = d3.forceSimulation().nodes(nodes_data);
+
+var link_force =  d3.forceLink(links_data).id(function(d) { return d.id; });
+
+var charge_force = d3.forceManyBody().strength(-400);
+
+var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar containera
+
+simulation.force("charge_force", charge_force)
+          .force("center_force", center_force)
+          .force("links",link_force);
+
+
+//stavljamo onTick za updejt rendera
+simulation.on("tick", tickActions );
+
+//stavljamo grupu za container za zoom
+var g = svg.append("g").attr("class", "everything");
+
+//draw lines for the links
+var link = g.append("g")
+    .attr("class", "links")
+    .selectAll("line")
+    .data(links_data)
+    .enter().append("line")
+    .attr("stroke-width", 2)
+    .style("stroke", linkColour);
+
+
+{#function makeColorTypeList(){#}
+{#    const colorList = [];#}
+{#    nodes_data.forEach(function(node){#}
+{#        const type = node.element_type;#}
+{#        const isInArray = colorList.some(e => e.hasOwnProperty(`type`));#}
+{#        if(!isInArray){#}
+{#            const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);#}
+{#            const el = { type: `"${color}"`};#}
+{#            colorList.push(el);#}
+{#        }#}
+{#    });#}
+{#    console.log(colorList);#}
+{#}#}
+
+function circleColour(d){
+    //
+    makeColorTypeList();
+    const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+    return color;
+}
+
+//draw circles for the nodes
+// var node = g.append("g")
+// //         .attr("class", "nodes") //stavljamo koju klasu ce imati element
+// //         .selectAll("circle.node")
+// //         .data(nodes_data)
+// //         .enter()
+// //         .append("circle")
+// //         .attr("class", "node")
+// //         .attr("r", radius)
+// //         .attr("fill", circleColour)
+// //         .on("click", handleMouseClick)
+// //         .on("mouseover", handleMouseOver)
+// //         .on("mouseout", handleMouseOut);
+
+var node = g.append("g")
+        .attr("class", "nodes") //stavljamo koju klasu ce imati element
+        .selectAll("rect.node")
+        .data(nodes_data)
+        .enter()
+        .append("rect")
+        .attr("class", "node")
+        .attr("width", 35)
+        .attr("height", 20)
+        .attr("fill", circleColour)
+        .on("click", handleMouseClick)
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut);
+
+
+var text = g.append("g")
+    .attr("class", "labels")
+    .selectAll("g")
+    .data(nodes_data)
+    .enter()
+    .append("g")
+    .append("text")
+    .attr("x", 14)
+    .attr("y", ".31em")
+    .style("font-family", "sans-serif")
+    .style("font-size", "0.7em")
+    .text(function (d) { return d.name; });
+
+
+//add drag capabilities
+var drag_handler = d3.drag()
+	.on("start", drag_start)
+	.on("drag", drag_drag)
+	.on("end", drag_end);
+
+drag_handler(node);
+
+//add zoom capabilities
+var zoom_handler = d3.zoom()
+    .on("zoom", zoom_actions);
+
+zoom_handler(svg);
+
+var label = node.append("text")
+      .text(function(d) {
+        return d.name;
+      })
+      .attr('x', 35/2)
+      .attr('y', 3);
+
+
+
+//dodavanje onog tool tipa -- d je node
+var div = d3.select("div.tooltip");
+
+function handleMouseOver(d, i) {
+    d3.select(this).transition()
+        .duration(500)
+        .attr("r", 24);
+    toolBoxIn(d);
+}
+
+function handleMouseOut(d, i) {
+    d3.select(this).transition()
+        .duration(500)
+        .attr("r", 15);
+    toolBoxOut(d);
+}
+
+function handleMouseClick(d,i){}
+
+
+//"title": "UKF 2018 DRAMnBASS", "creator": "Spotty", "duration": "1:44:11", "picture": "https://api.deezer.com/playlist/4268172382/image"
+function toolBoxIn(d){
+    if(d.attrs !== ""){
+        div.style("visibility", "visible")
+        .transition()
+        .duration(200)
+        .style("opacity", .9);
+        var html = "something";
+        {#if(d.element_type === "track")#}
+        {#    var html = `Duration: ${d.atributes.duration}`;#}
+        {#else if(d.element_type === "artist")#}
+        {#    var html = `Name: ${d.atributes.name} <br/>`;#}
+        {#else{#}
+        {#     var html = `Duration: ${d.atributes.duration}`;#}
+        {#}#}
+
+        //uzimamo poziciju misa za koordinate tooltipa
+        div.html(html)
+        .style("top", (d3.event.pageY + 16) + "px")
+        .style("left", (d3.event.pageX + 16) + "px");
+    }
+}
+
+function toolBoxOut(d){
+    div.transition()
+        .duration(500)
+        .style("opacity", 0)
+        .each("end", function(){
+        div.style("visibility", "hidden")
+        });
+}
+
+
+
+function linkColour(d){
+	return "blue";
+}
+
+function drag_start(d) {
+ if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+}
+
+//kako ne bi radio drag van continera
+function drag_drag(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
+
+function drag_end(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d.fx = null;
+  d.fy = null;
+}
+
+function zoom_actions(){
+    g.attr("transform", d3.event.transform)
+}
+
+function tickActions() {
+    //updejt iscrtanih komponenti na svaki takt
+    node
+        .attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; });
+
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    text
+        .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+</script>

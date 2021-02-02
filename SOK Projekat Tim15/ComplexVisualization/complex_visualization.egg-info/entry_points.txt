@@ -1,0 +1,3 @@
+[visualize.data]
+complex_visualization = complex_visualization.visualization:ComplexVisualization
+
