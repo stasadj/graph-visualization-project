@@ -21,7 +21,7 @@ function getWidth() {
   }
 
   //kreiramo svg na kome se sve renderuje
-  var svg = d3.select(".main_svg"), //TODO #main_svg
+  var svg = d3.select("svg"), //TODO #main_svg
       width = getWidth(),
       height = getHeight();
 
@@ -133,7 +133,8 @@ function getWidth() {
           .attr('stroke','gray')
           .attr('stroke-width',1);
 
-        for(var i=0;i<categoryNum;i++)
+      //jer necu da prikazujem links ide minus
+        for(var i=0;i<categoryNum-1;i++)
         {
           d3.select("#v" + d.id)
               .append('text')
