@@ -78,6 +78,7 @@ U gornjem levom uglu se bira iz drop-down menija željena komponenta za učitava
 Potom se unosi link ka Deezer plejlisti ili bira .xml fajl iz fajl sistema, u zavisnosti od   
 odabrane komponente.  
 Nakon uspešnog učitavanja podataka, sledi odabir vizualizacione komponente.  
+SimpleVisualization prikazuje samo nazive čvorova, dok ComplexVisualization i atribute.  
 Sa desne strane ekrana je dinamički prikaz podataka u obliku stabla (eng. *tree view*).   
 Ispod stabla nalazi se umanjeni prikaz grafa u ptičjoj perspektivi (eng. *bird view*).   
 Duplim klikom na element stabla dobijaju se dodatne informacije o selektovanom entitetu.   
