@@ -34,7 +34,7 @@ function getWidth() {
 
   var link_force =  d3.forceLink(links_data).id(function(d) { return d.id; });
 
-  var charge_force =  d3.forceManyBody().strength(-(nodes_data.length)*40);
+  var charge_force =  d3.forceManyBody().strength(-3000);
 
   var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar containera
 
@@ -122,7 +122,11 @@ function getWidth() {
           .attr('font-size',textSize)
           .attr('font-family','sans-serif')
           .attr('fill','green')
-          .text(d.name);
+          .text(function(d){
+              if(d.name == 0)
+                  return d.element_type;
+              return d.name;
+          });
 
       d3.select("#v" + d.id)
           .append('line')
@@ -133,8 +137,7 @@ function getWidth() {
           .attr('stroke','gray')
           .attr('stroke-width',1);
 
-      //jer necu da prikazujem links ide minus
-        for(var i=0;i<categoryNum-1;i++)
+        for(var i=0;i<categoryNum;i++)
         {
           d3.select("#v" + d.id)
               .append('text')
