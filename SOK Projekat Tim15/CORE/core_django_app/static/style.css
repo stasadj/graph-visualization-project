@@ -1,6 +1,8 @@
 body {
    background-image: url('bg.jpg');
    font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+   width: 100%;
+   height: 100%;
 }
 
 .left {
@@ -23,6 +25,8 @@ body {
 
 .page{
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -90,7 +94,7 @@ table {
   float: left;
   position: relative;
   display: block;
-  height: 70%;
+  height: 68%;
   width: 95%;
   border: 2px solid #60666d;
   padding: 10px;
@@ -102,7 +106,7 @@ table {
 #main_view {
   position: relative;
   display: inline-block;
-  height: 805px;
+  height: 509px;
   width: 75%;
   border: 2px solid #60666d;
   padding: 10px;
@@ -113,7 +117,7 @@ table {
   float: left;
   position: relative;
   display: block;
-  height: 27%;
+  height: 28%;
   width: 95%;
   border: 2px solid #60666d;
   padding: 10px;
@@ -124,7 +128,7 @@ table {
   float: left;
   position: relative;
   display: inline-block;
-  height: 800px;
+  height: 500px;
   width: 20%;
 }
 
