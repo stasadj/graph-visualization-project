@@ -78,7 +78,7 @@ class Graph:
             return '({0},{1},{2})'.format(self._origin, self._destination, self._element)
 
     # ------------------------- Metode klase Graph -------------------------
-    def __init__(self, directed=False):
+    def __init__(self, directed=True):
         """ Kreira prazan graf (podrazumevana vrednost je da je neusmeren).
 
         Ukoliko se opcioni parametar directed postavi na True, kreira se usmereni graf.
@@ -171,3 +171,49 @@ class Graph:
         e = self.Edge(u, v, x, self.edge_count()+1)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
+
+
+    def is_isolated(self, v):
+        if len(self._incoming[v]) == 0 and len(self._outgoing[v]) == 0:
+            return True
+        else:
+            return False
+
+    def is_hanging(self, v):
+        if len(self._incoming[v]) == 0:
+            return True
+        else:
+            return False
+
+    def has_hanging(self):
+        for v in self.vertices():
+            if len(self._incoming[v]) == 0:
+                return True
+        return False
+
+    def is_connected(self):
+        for v in self.vertices():
+            if self.is_isolated(v):
+                return False
+        return True
+
+    def roots(self):
+        roots = []
+        vertex_degree = {}
+        vertices = self.vertices()
+        has_hanging = self.has_hanging()
+        for v in vertices:
+            if has_hanging:
+                if self.is_hanging(v):
+                    vertex_degree[v] = self.degree(v)
+            else:
+                vertex_degree[v] = self.degree(v)
+
+        max_key = max(vertex_degree, key=lambda k: vertex_degree[k])
+        roots.append(max_key)
+
+        if self.is_connected() is False:
+            for v in vertices:
+                if self.is_isolated(v) and v not in roots:
+                    roots.append(v)
+        return roots
