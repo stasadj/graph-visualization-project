@@ -26,7 +26,7 @@ Kako bi *DeezerDataLoader* komponenta pravilno radila, potrebno je instalirati i
 
 
 ```
-pip install requires
+pip install requests
 ```
 
 ## Parametrizacija Django projekta
