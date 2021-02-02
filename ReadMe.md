@@ -87,7 +87,7 @@ Nakon uspešnog učitavanja podataka, sledi odabir vizualizacione komponente.
 Sa desne strane ekrana je dinamički prikaz podataka u obliku stabla (eng. *tree view*).   
 Ispod stabla nalazi se umanjeni prikaz grafa u ptičjoj perspektivi (eng. *bird view*).   
 Duplim klikom na element stabla dobijaju se dodatne informacije o selektovanom entitetu.   
-Stablo podržava i ciklične grafove, te je moguće beskonačno iči u dubinu.  
+Stablo podržava i ciklične grafove, te je moguće beskonačno ići u dubinu.  
 Desno od stabla nalazi se glavni prikaz grafa (eng. *main view*)  
 koji podržava zumiranje, pomeranje celog grafa i pomeranje pojedinačnih čvorova.  
 Graf je moguće pretraživati i filtrirati po nazivu i atributima unosom teksta u polje iznad grafa  
