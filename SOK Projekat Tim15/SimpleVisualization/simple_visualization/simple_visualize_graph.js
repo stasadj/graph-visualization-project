@@ -1,8 +1,29 @@
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+};
 
-var radius = 30;
+function getHeight() {
+  return Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.documentElement.clientHeight
+  );
+};
+
+//kreiramo svg na kome se sve renderuje
+var svg = d3.select("svg"),
+    width = getWidth(),
+    height = getHeight();
+
+var radius = 20;
 
 var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
 
@@ -30,8 +51,7 @@ simulation
 simulation.on("tick", tickActions );
 
 var g = svg.append("g")
-    .attr("class", "everything")
-    .attr('transform', "translate(730, 400)");
+    .attr("class", "everything");
 
 var link = g.append("g")
       .attr("class", "links")
@@ -41,6 +61,16 @@ var link = g.append("g")
       .attr("stroke-width", 2)
       .style("stroke", tcColours[randomTcColour()]);
 
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("display", "flex")
+    .style("justify-content", "flex-start")
+    .style("visibility", "hidden")
+    .style("background", tcColours[randomTcColour()])
+    .text("");
+
 var node = g.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
@@ -48,7 +78,10 @@ var node = g.append("g")
         .enter()
         .append("circle")
         .attr("r", radius)
-        .attr("fill", tcColours[randomTcColour()]);
+        .attr("fill", tcColours[randomTcColour()])
+        .on("mouseover", function(d){tooltip.text(d); return tooltip.style("visibility", "visible").text(json_petty(d.atributes));})
+        .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+        .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
 var label = g.append("g")
     .attr("class", "label")
@@ -76,6 +109,15 @@ var zoom_handler = d3.zoom()
     .on("zoom", zoom_actions);
 
 zoom_handler(svg);
+
+function json_petty(atr)
+{
+    var str_json = "";
+    for (const key in atr) {
+            str_json += key + ": " + atr[key] + "\n";
+        }
+    return str_json;
+}
 
 function empty_string(d){
 	return d.element_type + ": " + d.name;
