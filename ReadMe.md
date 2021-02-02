@@ -53,11 +53,13 @@ git clone https://gitlab.com/sok_2020_2021/tim15.git
         ```
         
 3. Za svaku od gore-navedenih komponenti, potrebno je pozicionirati se u njihov direktorijum i instalirati ih komandom:
+
 ```
 python setup.py install
 ```
 
 4. Kako bi *DeezerDataLoader* komponenta pravilno radila, potrebno je instalirati i **requests** HTTP biblioteku:
+
 ```
 pip install requests
 ```
@@ -65,11 +67,13 @@ pip install requests
 ## Parametrizacija Django projekta
 
 5. Instalirati Django u virtuelnom okruženju komandom:
+
 ```
 pip install Django
 ```
 
 6. Pozicionirati se u **django_project** direktorijum i pokrenuti server komandom
+
 ```
 python manage.py runserver
 ```
