@@ -202,6 +202,7 @@ class Graph:
         vertex_degree = {}
         vertices = self.vertices()
         has_hanging = self.has_hanging()
+
         for v in vertices:
             if has_hanging:
                 if self.is_hanging(v):
@@ -209,8 +210,9 @@ class Graph:
             else:
                 vertex_degree[v] = self.degree(v)
 
-        max_key = max(vertex_degree, key=lambda k: vertex_degree[k])
-        roots.append(max_key)
+        if len(vertex_degree) > 0:
+            max_key = max(vertex_degree, key=lambda k: vertex_degree[k])
+            roots.append(max_key)
 
         if self.is_connected() is False:
             for v in vertices:
