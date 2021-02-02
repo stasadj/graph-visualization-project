@@ -1,6 +1,7 @@
 {% extends "main_view.html" %}
 {% block tree_view %}
 <script>
+function tree_view() {
     var data = [
     {% for v in graph.vertices %}
     {
@@ -129,7 +130,9 @@
         alert(out);
     }
 );
+}
 
+tree_view();
 
 </script>
 {% endblock %}
