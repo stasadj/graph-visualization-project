@@ -7,7 +7,7 @@
 * SW-52-2018 Dina Petrov
 
 ## Komponente
-* CORE - jezgro aplikacije
+* CORE - jezgro programa i ujedno i Django aplikacija
 * XMLDataLoader - učitavanje XML fajlova
 * DeezerDataLoader - učitavanje podataka o *Deezer* plejlistama
 * SimpleVizualization - jednostavan prikaz podataka u vidu grafa
@@ -21,6 +21,7 @@
 ```
 git clone https://gitlab.com/sok_2020_2021/tim15.git
 ```
+  
 
 2. Poželjno je koristiti virtuelno okruženje:
 
