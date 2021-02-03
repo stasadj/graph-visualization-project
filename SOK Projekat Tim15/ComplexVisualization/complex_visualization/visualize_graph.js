@@ -111,6 +111,8 @@ function addElements(d){
           })
           .attr("stroke-width", 0.5)
           .attr('width',widthRect)
+          .attr("x", -(widthRect / 2))
+          .attr("y", -(height / 2))
           .attr('height',height)
           .attr('fill',rectColour)
           .on("click", function(d){
@@ -168,8 +170,8 @@ function addElements(d){
 
       d3.select("#v" + d.id)
           .append('text')
-          .attr('x',widthRect/2)
-          .attr('y',15)
+          .attr('x',-(widthRect/16))
+          .attr('y',-(height / 2 ) + 15)
           .attr('text-anchor','middle')
           .attr('font-size',textSize)
           .attr('font-family','sans-serif')
@@ -180,10 +182,10 @@ function addElements(d){
 
       d3.select("#v" + d.id)
           .append('line')
-          .attr('x1',0) //pocetak
-          .attr('y1',textSize + 10)
-          .attr('x2',widthRect) //kraj
-          .attr('y2',textSize + 10)
+          .attr('x1',-(widthRect/2)) //pocetak
+          .attr('y1',-(height / 2) + textSize + 10)
+          .attr('x2',widthRect/2) //kraj
+          .attr('y2',-(height / 2) + textSize + 10)
           .attr('stroke','gray')
           .attr('stroke-width',1);
 
@@ -191,8 +193,8 @@ function addElements(d){
         {
           d3.select("#v" + d.id)
               .append('text')
-              .attr('x',5)
-              .attr('y',30+i*textSize)
+              .attr('x',-(widthRect/2) + 5)
+              .attr('y',-(height/2) + 30+i*textSize)
               .attr('text-anchor','start')
               .attr('font-size',textSize)
               .attr('font-family','sans-serif')
