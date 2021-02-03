@@ -22,10 +22,11 @@ function getHeight() {
     );
 }
 
-//kreiramo svg na kome se sve renderuje
-var svg = d3.select("svg"), //TODO #main_svg
-  width = getWidth(),
-  height = getHeight();
+  //kreiramo svg na kome se sve renderuje
+  var svg = d3.select("#main_view_svg"), //TODO #main_svg
+      width = getWidth(),
+      height = getHeight();
+
 
 var width_rect = 250;
 var colorList = [];

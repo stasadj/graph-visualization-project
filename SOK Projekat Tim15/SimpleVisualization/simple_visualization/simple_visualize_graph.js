@@ -19,17 +19,14 @@ function getHeight() {
 };
 
 //kreiramo svg na kome se sve renderuje
-var svg = d3.select("svg"),
+var svg = d3.select("#main_view_svg"),
     width = getWidth(),
     height = getHeight();
 
 var radius = 20;
 
-var tcColours = ['#e5cf8c', '#ffa3a0', '#ffa3dd', '#9dffc1', '#9bff5f', '#ad9dff'];
+var tcColours = ['#FAAB36', '#249EA0'];
 
-var randomTcColour = function() {
-  return Math.floor(Math.random() * tcColours.length);
-};
 
 var simulation = d3.forceSimulation()
 					.nodes(nodes_data);
@@ -59,7 +56,7 @@ var link = g.append("g")
     .data(links_data)
     .enter().append("line")
     .attr("stroke-width", 2)
-    .style("stroke", tcColours[randomTcColour()]);
+    .style("stroke", tcColours[1]);
 
 var tooltip = d3.select("body")
     .append("div")
@@ -73,7 +70,7 @@ var tooltip = d3.select("body")
     .style("font-family", "Arial")
     .style("font-size", 15)
     .style("font-weight", "bold")
-    .style("background", tcColours[randomTcColour()])
+    .style("background", tcColours[0])
     .text("");
 
 var node = g.append("g")
@@ -83,7 +80,7 @@ var node = g.append("g")
         .enter()
         .append("circle")
         .attr("r", radius)
-        .attr("fill", tcColours[randomTcColour()])
+        .attr("fill", tcColours[0])
         .on("mousedown", function(){return tooltip.style("visibility", "hidden").text("");})
         .on("mouseover", function(d){return tooltip.style("visibility", "visible").text(json_petty(d.atributes));})
         .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})

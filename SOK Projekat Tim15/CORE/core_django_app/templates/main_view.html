@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block main_view %}
-<svg preserveAspectRatio="xMinYMin meet"></svg>
+<svg id="main_view_svg" preserveAspectRatio="xMinYMin meet"></svg>
 <script>
 
+function main_view() {
 var nodes_data =  [
     {% for v in graph.vertices %}
     {"id" : {{v.id}}, "name" : "{{v.name | safe}}", "element_type" : "{{v.element_type | safe}}", "atributes" : {{v.get_json_attributes | safe}} },
@@ -16,6 +17,9 @@ var links_data = [
 ]
 
 {{plugin.visualize | safe}}
+}
+
+main_view();
 
 </script>
 {% endblock %}
