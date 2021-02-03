@@ -110,8 +110,8 @@ def search_data(request):
         return redirect("index")
 
     parameter = request.POST["search_input"]
-
-    new_graph = create_search_graph(parameter)
+    old_graph = config.graph
+    new_graph = old_graph.create_search_graph(parameter)
 
     return render(request, "index.html", {"title": "Main View",
                                           "plugin": config.chosen_visualize_plugin,
@@ -120,74 +120,6 @@ def search_data(request):
                                           "data_loaded": True,
                                           "load_plugins": config.load_data_plugins,
                                           "visualize_plugins": config.visualize_data_plugins})
-
-
-def create_search_graph(parameter):
-    config = apps.get_app_config('core_django_app')
-    old_graph = config.graph
-    new_graph = Graph(old_graph.is_directed())
-
-    for v in old_graph.vertices():
-        if parameter.lower() in v.name().lower() or parameter.lower() in v.element_type().lower():
-            new_graph.insert_vertex_object(v)
-        else:
-            for val in v.attributes().values():
-                if parameter.lower() in val.lower():
-                    print(val.lower())
-                    new_graph.insert_vertex_object(v)
-
-    for v in new_graph.vertices():
-        for v2 in new_graph.vertices():
-            if v is not v2:
-                if old_graph.get_edge(v, v2) is not None and new_graph.get_edge(v, v2) is None:
-                    new_graph.insert_edge(v, v2)  # todo ili da dodas postojeci objekat?
-
-    return new_graph
-
-
-def value_passes_query(vertex_value, query_operator, query_value):
-    if query_operator == "==":
-        return vertex_value == query_value
-
-    elif query_operator == "!=":
-        return vertex_value != query_value
-
-    elif query_operator == ">":
-        return vertex_value > query_value
-
-    elif query_operator == "<":
-        return vertex_value < query_value
-
-    elif query_operator == ">=":
-        return vertex_value >= query_value
-
-    elif query_operator == "<=":
-        return vertex_value <= query_value
-
-
-def create_filter_graph(query_tokens):
-    config = apps.get_app_config('core_django_app')
-    old_graph = config.graph
-    new_graph = Graph(old_graph.is_directed())
-
-    query_attribute = query_tokens[0]
-    query_operator = query_tokens[1]
-    query_value = query_tokens[2]
-
-    for v in old_graph.vertices():
-        # Checking if vertex attributes contain attribute in query
-        if query_attribute in v.attributes().keys():
-            if value_passes_query(v.attributes()[query_attribute], query_operator, query_value):
-                new_graph.insert_vertex_object(v)
-
-    # Checking if there are any edges between the chosen vertices
-    for v in new_graph.vertices():
-        for v2 in new_graph.vertices():
-            if v is not v2:
-                if old_graph.get_edge(v, v2) is not None and new_graph.get_edge(v, v2) is None:
-                    new_graph.insert_edge(v, v2)  # todo ili da dodas postojeci objekat?
-
-    return new_graph
 
 
 def query_format_correct(query):
@@ -223,7 +155,8 @@ def filter_data(request):
                                               "load_plugins": config.load_data_plugins,
                                               "visualize_plugins": config.visualize_data_plugins})
 
-    new_graph = create_filter_graph(get_query_tokens(query))
+    old_graph = config.graph
+    new_graph = old_graph.create_filter_graph(get_query_tokens(query))
     return render(request, "index.html", {"title": "Main View",
                                           "plugin": config.chosen_visualize_plugin,
                                           "graph": new_graph,
