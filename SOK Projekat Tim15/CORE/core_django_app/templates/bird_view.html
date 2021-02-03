@@ -20,11 +20,7 @@ var links_data = [
 
 var radius = 10;
 
-var tcColours = ['#FDBB30', '#EE3124', '#EC008C', '#F47521', '#7AC143', '#00B0DD'];
-
-var randomTcColour = function() {
-  return Math.floor(Math.random() * tcColours.length);
-};
+var tcColours = ['#FAAB36', '#249EA0'];
 
 var simulation = d3.forceSimulation()
 					.nodes(nodes_data);
@@ -55,7 +51,7 @@ var link = g.append("g")
     .data(links_data)
     .enter().append("line")
       .attr("stroke-width", 2)
-      .style("stroke", tcColours[randomTcColour()]);
+      .style("stroke", tcColours[1]);
 
 var node = g.append("g")
         .attr("class", "nodes")
@@ -64,7 +60,7 @@ var node = g.append("g")
         .enter()
         .append("circle")
         .attr("r", radius)
-        .attr("fill", tcColours[randomTcColour()]);
+        .attr("fill", tcColours[0]);
 
 var label = g.append("g")
     .attr("class", "label")
