@@ -1,6 +1,4 @@
 
-
-
 //dobijamo visinu/sirinu broswer prozora
 function getWidth() {
     return Math.max(
@@ -39,7 +37,7 @@ var link_force =  d3.forceLink(links_data).id(function(d) { return d.id; });
 
 var charge_force =  d3.forceManyBody().strength(-3500);
 
-var center_force = d3.forceCenter(width / 3, height / 4);  //sila u centar containera
+var center_force = d3.forceCenter(width / 3, height / 3);  //sila u centar containera
 
 simulation.force("charge_force", charge_force)
         .force("center_force", center_force)
@@ -114,58 +112,7 @@ function addElements(d){
           .attr("x", -(widthRect / 2))
           .attr("y", -(height / 2))
           .attr('height',height)
-          .attr('fill',rectColour)
-          .on("click", function(d){
-               let temp = "v" + d.id;
-               //ako je prvi put kliknut
-               console.log(clickedNodeId);
-               if(clickedNodeId  !== temp || clickedNodeId === ""){
-                   //this postaje crven
-                    d3.select(this)
-                      .attr("stroke", "red")
-                      .attr("stroke-width", 3);
-                    //stari postaje Normalan
-                   d3.select("#" + clickedNodeId)
-                      .attr("stroke", "black")
-                      .attr("stroke-width", 0.5);
-                   //postavljamo novi crveni kliknut
-                    clickedNodeId = "v" + d.id;
-               }else{
-                   //ako je node vec bio kliknut onda vracamo na default
-                     d3.select(this)
-                      .attr("stroke", "black")
-                      .attr("stroke-width", 0.5);
-                      clickedNodeId = ""; //ni jedan nije selektovan
-               }
-
-          })
-          .on("mouseover", function (d) {
-              let temp = "v" + d.id;
-              if(clickedNodeId !== temp){
-                   d3.select(this)
-                      .attr("stroke", function(d){
-                          return "black";
-                      })
-                      .attr("stroke-width", 3);
-              }else{
-                  d3.select(this)
-                      .attr("stroke", "red")
-                      .attr("stroke-width", 3);
-              }
-
-          })
-          .on("mouseout", function(d){
-              let temp = "v" + d.id;
-              if(clickedNodeId !== temp){
-                  d3.select(this)
-                      .attr("stroke", "black")
-                      .attr("stroke-width", 0.5);
-              } else {
-                  d3.select(this)
-                      .attr("stroke", "red")
-                      .attr("stroke-width", 3);
-              }
-          });
+          .attr('fill',rectColour);
 
 
       d3.select("#v" + d.id)
@@ -228,19 +175,6 @@ function addElements(d){
   function handleMouseOver() {
 
   }
-  //
-  // function handleMouseOut() {
-  //     //moramo da proverimo da li je kliknut
-  //
-  //
-  // }
-  //
-  // function handleMouseClick(d,i){
-  //     console.log(d.id + " name " + d.name);
-  //      d3.select(this)
-  //         .attr("stroke", "black")
-  //         .attr("stroke-width", 0.5);
-  // }
 
   function linkColour(d){
       return "blue";
@@ -272,11 +206,6 @@ function addElements(d){
 
       node
           .attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")";});
-      //  node
-      //     .attr("transform", function(d) {return `translate(
-      //           ${(d.source.x + d.target.x)/2},
-      //           ${(d.source.y + d.target.y)/2})`;
-      //     });
 
       link
           .attr("x1", function(d) { return d.source.x; })
