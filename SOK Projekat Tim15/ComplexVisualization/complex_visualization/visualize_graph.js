@@ -39,7 +39,7 @@ var link_force =  d3.forceLink(links_data).id(function(d) { return d.id; });
 
 var charge_force =  d3.forceManyBody().strength(-3500);
 
-var center_force = d3.forceCenter(width / 2, height / 2);  //sila u centar containera
+var center_force = d3.forceCenter(width / 3, height / 3);  //sila u centar containera
 
 simulation.force("charge_force", charge_force)
         .force("center_force", center_force)
