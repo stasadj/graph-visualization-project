@@ -83,6 +83,9 @@ var node = g.append("g")
         .attr('id', function(d){
           return "v" + d.id})
         .append("circle")
+        .attr("stroke", function(){
+              return "black";
+          })
         .attr("stroke-width", 0.5)
         .attr("r", radius)
         .attr("fill", tcColours[0])
