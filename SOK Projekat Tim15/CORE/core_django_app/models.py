@@ -220,7 +220,8 @@ class Graph:
                     roots.append(v)
         return roots
 
-    # Search and filter options:
+
+    # Search methods: --------------------------------------------------------------------------------------------------
 
     def create_search_graph(self, parameter):
         """
@@ -230,15 +231,44 @@ class Graph:
         """
         new_graph = Graph(self.is_directed())
 
-        for v in self.vertices():
-            if parameter.lower() in v.name().lower() or parameter.lower() in v.element_type().lower():
-                new_graph.insert_vertex_object(v)
-            else:
+        try_float = ignore_exception(ValueError)(float)
+        try_int = ignore_exception(ValueError)(int)
+        converted_param = parameter
+
+        if try_int(parameter) is not None:
+            param_type = int
+            converted_param = try_int(parameter)
+
+        elif try_float(parameter) is not None:
+            param_type = float
+            converted_param = try_float(parameter)
+
+        else:
+            param_type = str
+
+        # If the search keyword is a string:
+        if param_type == str:
+            for v in self.vertices():
+
+                if parameter.lower() in v.name().lower() or parameter.lower() in v.element_type().lower():
+                    new_graph.insert_vertex_object(v)
+                else:
+                    for val in v.attributes().values():
+                        if type(val) == param_type:
+                            if parameter.lower() in val.lower():
+                                print(val.lower())
+                                new_graph.insert_vertex_object(v)
+
+        # If the search keyword is not a string - float, int
+        else:
+            for v in self.vertices():
                 for val in v.attributes().values():
-                    if parameter.lower() in val.lower():
-                        print(val.lower())
+                    if type(val) == param_type and val == converted_param:
+                        print(val)
                         new_graph.insert_vertex_object(v)
 
+
+        # Checking if there are any edges between the chosen vertices
         for v in new_graph.vertices():
             for v2 in new_graph.vertices():
                 if v is not v2:
@@ -247,10 +277,13 @@ class Graph:
 
         return new_graph
 
+
+    # Filter methods: --------------------------------------------------------------------------------------------------
+
     def create_filter_graph(self, query_tokens):
         """
         Method creates a subgraph based on the filter query
-        :param query_tokens: list of words of the query
+        :param query_tokens: list of words of the query, for example: ["name", "==", "Bohemian rapsody"]
         :return: Graph object which is a subgraph containing the nodes and edges which fit the filter query
         """
         new_graph = Graph(self.is_directed())
@@ -259,10 +292,26 @@ class Graph:
         query_operator = query_tokens[1]
         query_value = query_tokens[2]
 
+        try_float = ignore_exception(ValueError)(float)
+        try_int = ignore_exception(ValueError)(int)
+        converted_query_value = query_value
+
+        if try_int(query_value) is not None:
+            param_type = int
+            converted_query_value = try_int(query_value)
+
+        elif try_float(query_value) is not None:
+            param_type = float
+            converted_query_value = try_float(query_value)
+
+        else:
+            param_type = str
+
+
         for v in self.vertices():
             # Checking if vertex attributes contain attribute in query
             if query_attribute in v.attributes().keys():
-                if value_passes_query(v.attributes()[query_attribute], query_operator, query_value):
+                if value_passes_query(v.attributes()[query_attribute], query_operator, converted_query_value):
                     new_graph.insert_vertex_object(v)
 
         # Checking if there are any edges between the chosen vertices
@@ -273,6 +322,7 @@ class Graph:
                         new_graph.insert_edge(v, v2)  # todo ili da dodas postojeci objekat?
 
         return new_graph
+
 
 def value_passes_query(vertex_value, query_operator, query_value):
     if query_operator == "==":
@@ -293,3 +343,17 @@ def value_passes_query(vertex_value, query_operator, query_value):
     elif query_operator == "<=":
         return vertex_value <= query_value
 
+
+def ignore_exception(IgnoreException=Exception, DefaultVal=None):
+    """ Decorator for ignoring exception from a function
+    e.g.   @ignore_exception(DivideByZero)
+    e.g.2. ignore_exception(DivideByZero)(Divide)(2/0)
+    """
+    def dec(function):
+        def _dec(*args, **kwargs):
+            try:
+                return function(*args, **kwargs)
+            except IgnoreException:
+                return DefaultVal
+        return _dec
+    return dec
