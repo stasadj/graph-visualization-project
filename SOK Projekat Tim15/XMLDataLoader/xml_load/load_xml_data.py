@@ -51,9 +51,10 @@ class LoadXMLData(LoadDataService):
 
             if 'ref' in element.attrib:
                 references = element.attrib['ref'].split(',')
+                self.parse_references(references)
                 for ref in references:
                     for elem in element_vertex.keys():
-                        if 'id' in elem.attrib and elem.attrib['id'] == ref.strip():
+                        if 'id' in elem.attrib and elem.attrib['id'] == ref:
                             self.graph.insert_edge(vertex, element_vertex[elem])
 
     def xml_tree(self, xml_dom):
@@ -81,6 +82,37 @@ class LoadXMLData(LoadDataService):
                 text = element.text.strip()
             else:
                 text = ''
+            self.parse_attributes(attrs)
+            text = self.parse_text(text)
             element_vertex[element] = self.graph.insert_vertex(tag, attrs, text)
 
         return element_vertex
+
+    def parse_attributes(self, attrs):
+        for k, v in attrs.items():
+            if k == 'ref':
+                continue
+            try:
+                attrs[k] = int(v)
+            except ValueError:
+                try:
+                    attrs[k] = float(v)
+                except ValueError:
+                    continue
+
+    def parse_text(self, text):
+        try:
+            text = int(text)
+        except ValueError:
+            try:
+                text = float(text)
+            except ValueError:
+                text = text
+        return text
+
+    def parse_references(self, references):
+        for i in range(0, len(references)):
+            try:
+                references[i] = int(references[i])
+            except ValueError:
+                return 
