@@ -229,39 +229,42 @@ class Graph:
 
         try_float = ignore_exception(ValueError)(float)
         try_int = ignore_exception(ValueError)(int)
-        converted_param = parameter
 
-        if try_int(parameter) is not None:
-            param_type = int
-            converted_param = try_int(parameter)
+        for v in self.vertices():
+            # Element_type check
+            # The element_type of a vertex is always a string
+            if parameter.lower() in v.element_type().lower():
+                new_graph.insert_vertex_object(v)
+                continue
 
-        elif try_float(parameter) is not None:
-            param_type = float
-            converted_param = try_float(parameter)
+            # Name check
+            # First we try to convert the parameter to the type of the vertex' name
+            converted_parameter = ignore_exception(ValueError)(type(v.name()))(parameter)
 
-        else:
-            param_type = str
-
-        # If the search keyword is a string:
-        if param_type == str:
-            for v in self.vertices():
-
-                if parameter.lower() in v.name().lower() or parameter.lower() in v.element_type().lower():
-                    new_graph.insert_vertex_object(v)
-                else:
-                    for val in v.attributes().values():
-                        if type(val) == param_type:
-                            if parameter.lower() in val.lower():
-                                print(val.lower())
-                                new_graph.insert_vertex_object(v)
-
-        # If the search keyword is not a string - float, int
-        else:
-            for v in self.vertices():
-                for val in v.attributes().values():
-                    if type(val) == param_type and val == converted_param:
-                        print(val)
+            # If it's not None, that means the conversion was successful and we can go on and compare the values
+            if converted_parameter is not None:
+                if type(v.name()) == str:
+                    if converted_parameter.lower() in v.name().lower():
                         new_graph.insert_vertex_object(v)
+                        continue
+                else:
+                    if v.name() == converted_parameter:
+                        new_graph.insert_vertex_object(v)
+                        continue
+
+            # Attributes
+            # Same as for Name for each attribute
+            for val in v.attributes().values():
+                converted_parameter = ignore_exception(ValueError)(type(val))(parameter)
+                if converted_parameter is not None:
+                    if type(val) == str:
+                        if converted_parameter.lower() in val.lower():
+                            new_graph.insert_vertex_object(v)
+                            break  # if attribute match, we don't look at the rest to prevent duplicate vertices
+                    else:
+                        if val == converted_parameter:
+                            new_graph.insert_vertex_object(v)
+                            break  # if attribute match, we don't look at the rest to prevent duplicate vertices
 
 
         # Checking if there are any edges between the chosen vertices
@@ -288,27 +291,26 @@ class Graph:
         query_operator = query_tokens[1]
         query_value = query_tokens[2]
 
-        try_float = ignore_exception(ValueError)(float)
-        try_int = ignore_exception(ValueError)(int)
-        converted_query_value = query_value
-
-        if try_int(query_value) is not None:
-            param_type = int
-            converted_query_value = try_int(query_value)
-
-        elif try_float(query_value) is not None:
-            param_type = float
-            converted_query_value = try_float(query_value)
-
-        else:
-            param_type = str
-
-
         for v in self.vertices():
-            # Checking if vertex attributes contain attribute in query
-            if query_attribute in v.attributes().keys():
-                if value_passes_query(v.attributes()[query_attribute], query_operator, converted_query_value):
+
+            # if query matches: "<element_type> <operator> <name>"
+            # then we can try and convert the value to the type of vertex' name
+            # and compare them
+            converted_query_value = ignore_exception(ValueError)(type(v.name()))(query_value)
+            if query_attribute.lower() == v.element_type().lower() and converted_query_value is not None:
+                if value_passes_query(v.name(), query_operator, converted_query_value):
                     new_graph.insert_vertex_object(v)
+                    continue
+
+
+            # Checking if attributes contain attribute and value from query
+            if query_attribute in v.attributes().keys():
+                converted_query_value = ignore_exception(ValueError)(type(v.attributes()[query_attribute]))(query_value)
+                if converted_query_value is not None:
+                    if value_passes_query(v.attributes()[query_attribute], query_operator, converted_query_value):
+                        new_graph.insert_vertex_object(v)
+
+
 
         # Checking if there are any edges between the chosen vertices
         for v in new_graph.vertices():
@@ -318,6 +320,7 @@ class Graph:
                         new_graph.insert_edge(v, v2)  # todo ili da dodas postojeci objekat?
 
         return new_graph
+
 
 
 def value_passes_query(vertex_value, query_operator, query_value):
