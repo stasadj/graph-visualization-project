@@ -66,7 +66,7 @@ class LoadDeezerData(LoadDataService):
         playlist_attributes["duration"] = convert_seconds(playlist["duration"])
         #playlist_attributes["picture"] = playlist["picture"]
         playlist_attributes["nb_tracks"] = str(playlist["nb_tracks"])
-        playlist_attributes["link"] = playlist["link"]
+        # playlist_attributes["link"] = playlist["link"]
 
         # Adding our root playlist vertex to graph
         playlist_vertex = self.graph.insert_vertex(playlist["type"], playlist_attributes, playlist["title"])
@@ -77,9 +77,9 @@ class LoadDeezerData(LoadDataService):
             track_attributes["title"] = track["title_short"]
             track_attributes["duration"] = convert_seconds(track["duration"])
             track_attributes["album"] = track["album"]["title"]
-            #track_attributes["picture"] = track["album"]["cover"]
+            # track_attributes["picture"] = track["album"]["cover"]
             track_attributes["rank"] = str(track["rank"])
-            track_attributes["link"] = track["link"]
+            # track_attributes["link"] = track["link"]
 
             # For each track we create a new vertex
             track_vertex = self.graph.insert_vertex(track["type"], track_attributes, track["title_short"])
@@ -96,7 +96,7 @@ class LoadDeezerData(LoadDataService):
             # If the artist vertex doesnt already exist, we create a new one
             artist_attributes = {}
             artist_attributes["name"] = track["artist"]["name"]
-            artist_attributes["link"] = track["artist"]["link"]
+            # artist_attributes["link"] = track["artist"]["link"]
 
             # #TODO: Rethink getting the artist picture, as we have to send a new request for each track -> time consuming
             # if playlist["nb_tracks"] <= 70:

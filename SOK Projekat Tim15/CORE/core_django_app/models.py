@@ -248,6 +248,11 @@ class Graph:
         return new_graph
 
     def create_filter_graph(self, query_tokens):
+        """
+        Method creates a subgraph based on the filter query
+        :param query_tokens: list of words of the query
+        :return: Graph object which is a subgraph containing the nodes and edges which fit the filter query
+        """
         new_graph = Graph(self.is_directed())
 
         query_attribute = query_tokens[0]
