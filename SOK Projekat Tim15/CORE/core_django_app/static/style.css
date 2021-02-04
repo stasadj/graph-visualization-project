@@ -102,7 +102,7 @@ table {
 #main_view {
   position: relative;
   display: inline-block;
-  height: 509px;
+  height: 85vh;
   width: 75%;
   border: 2px solid #60666d;
   padding: 10px;
@@ -124,7 +124,7 @@ table {
   float: left;
   position: relative;
   display: inline-block;
-  height: 500px;
+  height: 85vh;
   width: 20%;
 }
 
