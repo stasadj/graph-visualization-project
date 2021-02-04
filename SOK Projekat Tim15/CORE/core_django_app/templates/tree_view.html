@@ -1,6 +1,7 @@
 {% extends "main_view.html" %}
 {% block tree_view %}
 <script>
+
 function tree_view() {
     var data = [
     {% for v in graph.vertices %}
@@ -50,8 +51,6 @@ function tree_view() {
         }
     }
 
-    var selected_node_id = 0;
-
     $('#tree_view').tree({
     data: roots,
     selectable: false
@@ -76,7 +75,6 @@ function tree_view() {
 
         $('.jqtree-element').each(function() {
         var node = $('#tree_view').tree('getNodeByHtmlElement', $(this));
-        console.log(selected_node_id);
         if (node.id === selected_node_id) {
             $(this).css('background-color', '#eb9334');
             node.selected = true;
@@ -98,12 +96,28 @@ function tree_view() {
     $('#tree_view').on(
     'tree.click',
     function(event) {
+
+        d3.selectAll('.node').each(function(d){
+            d3.select(`#v${d.id} > *`)
+                .attr("stroke", "black")
+                .attr("stroke-width", 0.5);
+        });
+
+
         if (event.node.selected){
             event.node.selected = false;
             selected_node_id = 0;
-        } else {
+        }
+        else {
             event.node.selected = true;
             selected_node_id = event.node.id;
+
+            d3.select(`#v${selected_node_id} > *`)
+                .attr("stroke", function(d){
+                     return "black";
+                })
+                .attr("stroke-width", 3);
+
         }
 
         $('.jqtree-element').each(function() {
@@ -128,8 +142,8 @@ function tree_view() {
             out += key + ": " +  event.node.attributes[key] + "\n";
         }
         alert(out);
-    }
-);
+    });
+
 }
 
 tree_view();

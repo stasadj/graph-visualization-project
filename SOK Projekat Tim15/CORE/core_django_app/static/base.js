@@ -1,3 +1,38 @@
+var selected_node_id = 0;
+
+function handleMouseClick(d) {
+
+    d3.selectAll('.node').each(function(d){
+            d3.select(`#v${d.id} > *`)
+                .attr("stroke", "black")
+                .attr("stroke-width", 0.5);
+    });
+
+    if (selected_node_id  === d.id){
+        selected_node_id = 0;
+    }
+    else {
+        selected_node_id = d.id;
+
+        d3.select(`#v${selected_node_id} > *`)
+            .attr("stroke", function(d){
+                 return "black";
+            })
+            .attr("stroke-width", 3);
+    }
+
+    $('.jqtree-element').each(function() {
+        var node = $('#tree_view').tree('getNodeByHtmlElement', $(this));
+        if (node.id === selected_node_id) {
+            $(this).css('background-color', '#eb9334');
+            node.selected = true;
+        } else {
+            $(this).css('background-color', 'transparent');
+            node.selected = false;
+        }
+        });
+}
+
 $(document).ready(function() {
     $('#source_select').change(function() {
         var selected = $(this).val();
@@ -36,29 +71,7 @@ $(document).ready(function() {
 
     });
 
-    $('').submit(function(event) {
-        event.preventDefault();
-        var formData = new FormData($(this)[0]);
 
-        $.post({
-				url: '/load/data',
-				data: formData,
-				success: function(pacijent) {
-					alert("OK")
-				}
-			});
-    });
+    d3.selectAll('.node').on("click", handleMouseClick);
 
-    $('').submit(function(event) {
-        event.preventDefault();
-        var serializedData = $(this).serialize();
-
-        $.post({
-				url: '/visualize/data',
-				data: serializedData,
-				success: function(pacijent) {
-					alert("OK")
-				}
-			});
-    });
 });
