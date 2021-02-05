@@ -10,6 +10,7 @@ function handleMouseClick(d) {
 
     if (selected_node_id  === d.id){
         selected_node_id = 0;
+        $("#selected_info").html('');
     }
     else {
         selected_node_id = d.id;
@@ -19,6 +20,15 @@ function handleMouseClick(d) {
                  return "black";
             })
             .attr("stroke-width", 3);
+
+        st = d.element_type + ": "  + d.name + "<br>";
+        attributes = d.atributes;
+
+        Object.keys(attributes).forEach(function(key) {
+            st += key + ": " + attributes[key] + "<br>";
+        });
+
+        $("#selected_info").html(st);
     }
 
     $('.jqtree-element').each(function() {
@@ -31,16 +41,6 @@ function handleMouseClick(d) {
             node.selected = false;
         }
         });
-
-    st = d.id + " " + d.name + "<br>";
-    attributes = d.atributes;
-
-    Object.keys(attributes).forEach(function(key) {
-        st += key + " " + attributes[key] + "<br>";
-    });
-
-    $("#selected_info").html(st);
-
 
 }
 
