@@ -1,0 +1,32 @@
+<Databases>
+  <Database name="Sold Phones">
+    <Phone ref="0" Network="3G" OS="IOS" Manufacturer="Apple">Model1</Phone>
+    <Phone ref="0" Network="4G" OS="IOS" Manufacturer="Apple">Model2</Phone>
+    <Phone ref="0" Network="4G" OS="Android" Manufacturer="Samsung">Model3</Phone>
+    <Phone ref="1" Network="3G" OS="Android" Manufacturer="Huawei">Model4</Phone>
+    <Phone ref="1" Network="4G" OS="IOS" Manufacturer="Apple">Model5</Phone>
+    <Phone ref="2" Network="3G" OS="IOS" Manufacturer="Apple">Model6</Phone>
+    <Phone ref="2" Network="3G" OS="Android" Manufacturer="Huawei">Model7</Phone>
+    <Phone ref="2" Network="4G" OS="Android" Manufacturer="Xiaomi">Model8</Phone>
+    <Phone ref="2" Network="4G" OS="Android" Manufacturer="Samsung">Model9</Phone>
+    <Phone ref="3" Network="3G" OS="Android" Manufacturer="Samsung">Model10</Phone>
+    <Phone ref="3" Network="4G" OS="Android" Manufacturer="Xiaomi">Model11</Phone>
+    <Phone ref="4" Network="4G" OS="Android" Manufacturer="Huawei">Model12</Phone>
+    <Phone ref="5" Network="3G" OS="IOS" Manufacturer="Apple">Model13</Phone>
+    <Phone ref="5" Network="4G" OS="Android" Manufacturer="Samsung">Model14</Phone>
+    <Phone ref="5" Network="4G" OS="Android" Manufacturer="Samsung">Model15</Phone>
+    <Phone ref="6" Network="4G" OS="Android" Manufacturer="Huawei">Model16</Phone>
+    <Phone ref="7" Network="3G" OS="Android" Manufacturer="Samsung">Model17</Phone>
+    <Phone ref="7" Network="4G" OS="IOS" Manufacturer="Apple">Model18</Phone>
+  </Database>
+  <Database name="Owners">
+    <Owner id="0" Age="14">Miranda</Owner>
+    <Owner id="1" Age="15">Anna</Owner>
+    <Owner id="2" Age="21">Peter</Owner>
+    <Owner id="3" Age="33">Alexander</Owner>
+    <Owner id="4" Age="45">Jane</Owner>
+    <Owner id="5" Age="55">Frank</Owner>
+    <Owner id="6" Age="63">Laura</Owner>
+    <Owner id="7" Age="79">Phil</Owner>
+  </Database>
+</Databases>
