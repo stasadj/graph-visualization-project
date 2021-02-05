@@ -289,7 +289,7 @@ class Graph:
             for v2 in new_graph.vertices():
                 if v is not v2:
                     if self.get_edge(v, v2) is not None and new_graph.get_edge(v, v2) is None:
-                        new_graph.insert_edge(v, v2)  # todo ili da dodas postojeci objekat?
+                        new_graph.insert_edge(v, v2)
 
         return new_graph
 
@@ -334,7 +334,7 @@ class Graph:
             for v2 in new_graph.vertices():
                 if v is not v2:
                     if self.get_edge(v, v2) is not None and new_graph.get_edge(v, v2) is None:
-                        new_graph.insert_edge(v, v2)  # todo ili da dodas postojeci objekat?
+                        new_graph.insert_edge(v, v2)
 
         return new_graph
 

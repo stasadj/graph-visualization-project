@@ -101,6 +101,18 @@ function tree_view() {
             d3.select(`#v${d.id} > *`)
                 .attr("stroke", "black")
                 .attr("stroke-width", 0.5);
+
+            console.log(d.id);
+            st = d.id + " " + d.name + "<br>";
+            attributes = d.atributes;
+
+            Object.keys(attributes).forEach(function(key) {
+                st += key + " " + attributes[key] + "<br>";
+            });
+
+            $("#selected_info").html(st);
+
+
         });
 
 

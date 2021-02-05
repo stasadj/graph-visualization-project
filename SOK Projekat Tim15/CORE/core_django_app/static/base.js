@@ -31,6 +31,17 @@ function handleMouseClick(d) {
             node.selected = false;
         }
         });
+
+    st = d.id + " " + d.name + "<br>";
+    attributes = d.atributes;
+
+    Object.keys(attributes).forEach(function(key) {
+        st += key + " " + attributes[key] + "<br>";
+    });
+
+    $("#selected_info").html(st);
+
+
 }
 
 $(document).ready(function() {

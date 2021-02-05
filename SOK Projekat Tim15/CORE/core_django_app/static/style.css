@@ -120,6 +120,15 @@ table {
   margin-top: 5px;
 }
 
+#selected_info{
+    height:200px;
+    width:250px;
+    background: rgba(250, 172, 56, 0.50);
+    position: fixed;
+    bottom:15px;
+    right:15px;
+}
+
 #tree_bird{
   float: left;
   position: relative;

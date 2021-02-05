@@ -70,7 +70,7 @@ var tooltip = d3.select("body")
     .style("font-family", "Arial")
     .style("font-size", 15)
     .style("font-weight", "bold")
-    .style("background", tcColours[0])
+    .style("background", "rgba(250, 172, 56, 0.50)")
     .text("");
 
 var node = g.append("g")
