@@ -95,3 +95,27 @@ Podržani poredbeni operatori su:
 ==, !=, <, <=, >, >=
 ```
  
+
+## SimpleVisualization i XMLDataLoader
+
+
+![simple_view_xml](/Images/simple_view_xml.PNG)
+ 
+
+## SimpleVisualization i DeezerDataLoader
+
+
+![simple_view_deezer](/Images/simple_view_deezer.PNG)
+
+
+## ComplexVisualization i XMLDataLoader
+
+
+![complex_view_xml](/Images/complex_view_xml.PNG)
+ 
+
+## ComplexVisualization i DeezerDataLoader
+
+
+![complex_view_deezer](/Images/complex_view_deezer.PNG)
+
