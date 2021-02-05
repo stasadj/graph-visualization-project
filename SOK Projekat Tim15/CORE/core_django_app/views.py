@@ -34,8 +34,9 @@ def visualize_data(request):
         if request.POST.get('visualization_plugin') == 'SimpleVisualization':
             plugin = config.visualize_data_plugins['SimpleVisualization']
             config.chosen_visualize_plugin = plugin
+            visualization = plugin.visualize(config.graph.get_json_graph())
             return render(request, "index.html", {"title": "Main View",
-                                                  "plugin": plugin,
+                                                  "visualization": visualization,
                                                   "data_visualized": True,
                                                   "data_loaded": True,
                                                   "graph": config.graph,
@@ -45,8 +46,9 @@ def visualize_data(request):
         if request.POST.get('visualization_plugin') == 'ComplexVisualization':
             plugin = config.visualize_data_plugins['ComplexVisualization']
             config.chosen_visualize_plugin = plugin
+            visualization = plugin.visualize(config.graph.get_json_graph())
             return render(request, "index.html", {"title": "Main View",
-                                                  "plugin": plugin,
+                                                  "visualization": visualization,
                                                   "data_visualized": True,
                                                   "data_loaded": True,
                                                   "graph": config.graph,
@@ -112,9 +114,11 @@ def search_data(request):
     parameter = request.POST["search_input"]
     old_graph = config.graph
     new_graph = old_graph.create_search_graph(parameter)
+    plugin = config.chosen_visualize_plugin
+    visualization = plugin.visualize(new_graph.get_json_graph())
 
     return render(request, "index.html", {"title": "Main View",
-                                          "plugin": config.chosen_visualize_plugin,
+                                          "visualization": visualization,
                                           "graph": new_graph,
                                           "data_visualized": True,
                                           "data_loaded": True,
@@ -138,6 +142,7 @@ def get_query_tokens(query):
 
 def filter_data(request):
     config = apps.get_app_config('core_django_app')
+    plugin = config.chosen_visualize_plugin
 
     # Preventing filtering if no data is displayed
     if config.chosen_visualize_plugin is None:
@@ -146,8 +151,9 @@ def filter_data(request):
     query = request.POST["filter_input"]
     if not query_format_correct(query):
         # if the query format isn't correct, we show the original graph again with an error message
+        visualization = plugin.visualize(config.graph.get_json_graph())
         return render(request, "index.html", {"title": "Main View",
-                                              "plugin": config.chosen_visualize_plugin,
+                                              "visualization": visualization,
                                               "graph": config.graph,
                                               "data_visualized": True,
                                               "data_loaded": True,
@@ -157,8 +163,9 @@ def filter_data(request):
 
     old_graph = config.graph
     new_graph = old_graph.create_filter_graph(get_query_tokens(query))
+    visualization = plugin.visualize(new_graph.get_json_graph())
     return render(request, "index.html", {"title": "Main View",
-                                          "plugin": config.chosen_visualize_plugin,
+                                          "visualization": visualization,
                                           "graph": new_graph,
                                           "data_visualized": True,
                                           "data_loaded": True,

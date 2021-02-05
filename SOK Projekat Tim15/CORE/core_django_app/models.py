@@ -216,6 +216,23 @@ class Graph:
 
         return roots
 
+    def get_json_graph(self):
+        ''' Vraca python recnik sa kljucevima nodes_data i links_data cije su vrednosti odgovarajuci json stringovi '''
+
+        graph = {}
+        graph['nodes_data'] = []
+        graph['links_data'] = []
+
+        for v in self.vertices():
+            graph['nodes_data'].append({'id': v.id(), 'name': v.name(), 'element_type': v.element_type(), 'atributes': v.attributes()})
+
+        for e in self.edges():
+            graph['links_data'].append({'source': e.endpoints()[0].id(), 'target': e.endpoints()[1].id()})
+
+        graph['nodes_data'] = json.dumps(graph['nodes_data'])
+        graph['links_data'] = json.dumps(graph['links_data'])
+        return graph
+
 
     # Search methods: --------------------------------------------------------------------------------------------------
 

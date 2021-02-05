@@ -29,7 +29,7 @@ class VisualizeService(Service):
         super().__init__()
 
     @abstractmethod
-    def visualize(self):
+    def visualize(self, graph):
         # povratna vrednost js kod
         pass
 
