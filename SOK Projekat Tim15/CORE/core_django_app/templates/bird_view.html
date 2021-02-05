@@ -1,12 +1,8 @@
 {% extends "tree_view.html" %}
 {% block bird_view %}
 
-<script>
-    var svg = d3.select("#bird_view_svg");
-	svg.on('.zoom', null)
-</script>
-    <svg id="bird_view_svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1500 1000">
-        <use xlink:href="#main_view_svg"/>
-        <!-- control the zoom and position with x, y, width and height -->
-    </svg>
+<svg id="bird_view_svg" svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1500 1000">
+    <use xlink:href="#graph" style="transform:translate(15%, 25%) scale(0.7);"/>
+</svg>
+
 {% endblock %}

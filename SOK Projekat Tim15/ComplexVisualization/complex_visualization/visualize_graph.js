@@ -48,7 +48,7 @@ simulation.force("charge_force", charge_force)
 simulation.on("tick", tickActions );
 
 //stavljamo grupu za container za zoom
-var g = svg.append("g").attr("class", "everything");
+var g = svg.append("g").attr("class", "everything").attr("id", "graph");;
 
 //draw lines for the links
 var link = g.append("g")

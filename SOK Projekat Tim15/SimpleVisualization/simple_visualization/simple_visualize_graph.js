@@ -37,7 +37,7 @@ var link_force =  d3.forceLink(links_data)
 var charge_force = d3.forceManyBody()
     .strength(-3500);
 
-var center_force = d3.forceCenter(width / 2, height / 2);
+var center_force = d3.forceCenter(width / 3, height / 3);
 
 simulation
     .force("charge_force", charge_force)
@@ -48,7 +48,8 @@ simulation
 simulation.on("tick", tickActions );
 
 var g = svg.append("g")
-    .attr("class", "everything");
+    .attr("class", "everything")
+    .attr("id", "graph");
 
 var link = g.append("g")
     .attr("class", "links")
