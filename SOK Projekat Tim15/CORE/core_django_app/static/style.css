@@ -123,10 +123,16 @@ table {
 #selected_info{
     height:200px;
     width:250px;
-    background: rgba(250, 172, 56, 0.50);
+    background: rgba(250, 172, 56, 0.7);
     position: fixed;
     bottom:15px;
     right:15px;
+    border-radius: 15px;
+    visibility: hidden;
+    padding: 10px;
+    text-align: justify;
+
+
 }
 
 #tree_bird{

@@ -108,6 +108,7 @@ function tree_view() {
             event.node.selected = false;
             selected_node_id = 0;
             $("#selected_info").html('');
+            $("#selected_info").css("visibility", "hidden")
         }
         else {
             event.node.selected = true;
@@ -119,7 +120,7 @@ function tree_view() {
                 })
                 .attr("stroke-width", 3);
 
-            st = id_node[selected_node_id].name + "<br>";
+            st = "<b>" + id_node[selected_node_id].name + "</b><br>";
             attributes = id_node[selected_node_id].attributes;
 
             Object.keys(attributes).forEach(function(key) {
@@ -127,6 +128,7 @@ function tree_view() {
             });
 
             $("#selected_info").html(st);
+            $("#selected_info").css("visibility", "visible")
         }
 
         $('.jqtree-element').each(function() {

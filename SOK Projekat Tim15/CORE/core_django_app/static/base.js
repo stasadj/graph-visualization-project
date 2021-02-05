@@ -11,6 +11,7 @@ function handleMouseClick(d) {
     if (selected_node_id  === d.id){
         selected_node_id = 0;
         $("#selected_info").html('');
+        $("#selected_info").css("visibility", "hidden")
     }
     else {
         selected_node_id = d.id;
@@ -21,7 +22,7 @@ function handleMouseClick(d) {
             })
             .attr("stroke-width", 3);
 
-        st = d.element_type + ": "  + d.name + "<br>";
+        st = "<b>" + d.element_type + ": "  + d.name + "</b><br>";
         attributes = d.atributes;
 
         Object.keys(attributes).forEach(function(key) {
@@ -29,6 +30,8 @@ function handleMouseClick(d) {
         });
 
         $("#selected_info").html(st);
+        $("#selected_info").css("visibility", "visible")
+
     }
 
     $('.jqtree-element').each(function() {
