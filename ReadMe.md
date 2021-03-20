@@ -19,7 +19,7 @@
 
 1. Pozicionirati se na željenu putanju u git bash-u i kucati:
 ```
-git clone https://gitlab.com/sok_2020_2021/tim15.git
+git clone https://github.com/stasadj/graph-visualization-project
 ```
   
 
